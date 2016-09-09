@@ -7,7 +7,7 @@ Autor
 Luiz Carlos Alves
 www.luizsistemas.com.br
 twitter: @luiz_sistemas
-facebook/luizsoftware
+Facebook/luizsoftware
 
 Fase do Projeto
 ===============
