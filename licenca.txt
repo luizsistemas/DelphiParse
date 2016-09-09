@@ -133,9 +133,6 @@ Para fazer isto, anexe as notificações seguintes à biblioteca. É mais seguro ane
 
 ----
 
-O objetivo da série "Que tal um ORM Básico?" do blog
-www.luizsistemas.com.br foi, de forma simples e objetiva,  demonstrar alguns conceitos e técnicas interessantes do Delphi e que, por muitas vezes, ainda pouco exploradas pelos desenvolvedores desta linguagem, principalmente por aqueles que ainda estão iniciando. 
-
 Esta biblioteca é software livre; você pode redistribuí-la e/ou modificá-la sob os termos da Licença Pública Geral Menor do GNU conforme publicada pela Free Software Foundation; tanto a versão 2.1 da Licença, ou qualquer versão posterior.
 
 Esta biblioteca é distribuído na expectativa de que seja útil, porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA. Consulte a Licença Pública Geral Menor do GNU para mais detalhes. 
