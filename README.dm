@@ -1,6 +1,6 @@
 Delphi Parse
 ============
-Este projeto tem por objetivo facilitar o uso do Delphi com Parse.
+Este projeto tem por objetivo facilitar o uso do Delphi com Parse. Tenho utilizado www.back4app.com para meus testes.
 
 Autor
 =====
