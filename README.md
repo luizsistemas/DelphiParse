@@ -4,10 +4,10 @@ Este projeto tem por objetivo facilitar o uso do Delphi com Parse. Tenho utiliza
 
 Autor
 =====
-Luiz Carlos Alves
-www.luizsistemas.com.br
-twitter: @luiz_sistemas
-Facebook/luizsoftware
+-Luiz Carlos Alves
+-www.luizsistemas.com.br
+-twitter: @luiz_sistemas
+-Facebook/luizsoftware
 
 Fase do Projeto
 ===============
