@@ -3,7 +3,7 @@ Win32/*
 Test/Win32/*
 
 # File Configuration#
-#source/DelphiParse.Configuration.pas
+source/DelphiParse.Configuration.pas
 
 # Compiled source #
 ###################
