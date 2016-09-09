@@ -23,4 +23,4 @@ O projeto conta com um projeto de teste contendo um formulário que mostra algum
 
 Copying
 -------
-Free use of this software is granted under the terms of the GNU Lesser General Public License (LGPL). For details see the filesCOPYING.LESSER included with the distribution.
+Free use of this software is granted under the terms of the GNU Lesser General Public License (LGPL). For details see the file *licenca.txt* included with the distribution.
