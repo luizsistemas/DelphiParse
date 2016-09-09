@@ -1,43 +1,46 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+# Diretories #
+Win32/*
+Test/Win32/*
 
-# Folder config file
-Desktop.ini
+# File Configuration#
+source/DelphiParse.Configuration.pas
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.dcu
+ 
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+ 
+# Logs and databases #
+######################
+*.log
+*.sqlite
+*.fdb
+*.gdb
+ 
+# OS generated files #
+######################
 .DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
+.DS_Store?
 .Spotlight-V100
 .Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+ehthumbs.db
+Thumbs.db
+*.~*
