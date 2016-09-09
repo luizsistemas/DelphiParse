@@ -1,0 +1,19 @@
+program DelphiParseProject;
+
+uses
+  FastMM4,
+  Vcl.Forms,
+  ufrmMain in 'views\ufrmMain.pas' {Form1},
+  DelphiParse.Consts in 'source\DelphiParse.Consts.pas',
+  DelphiParse.Interfaces in 'source\DelphiParse.Interfaces.pas',
+  DelphiParse.Objects in 'source\DelphiParse.Objects.pas',
+  DelphiParse in 'source\DelphiParse.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

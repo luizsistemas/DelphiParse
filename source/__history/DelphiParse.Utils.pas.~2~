@@ -1,0 +1,9 @@
+unit DelphiParse.Utils;
+
+interface
+
+function SepElement(Separator: String; Array of string): string;
+
+implementation
+
+end.

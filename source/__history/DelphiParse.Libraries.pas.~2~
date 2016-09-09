@@ -1,0 +1,66 @@
+unit DelphiParse.Libraries;
+
+interface
+
+uses DelphiParse.Interfaces, System.JSON,
+  System.SysUtils, System.Generics.Collections;
+
+type
+  TDelphiParse = class(TInterfacedObject, IDelphiParse)
+  private
+
+  public
+    function Post(const ParamsUrl: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil;
+      DataOwner: boolean = true): IResponseParse;
+
+    function Get(const ParamsUrl: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil;
+      DataOwner: boolean = true): IResponseParse;
+
+    function Put(const ParamsUrl: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil;
+      DataOwner: boolean = true): IResponseParse;
+
+    function Delete(const ParamsUrl: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil;
+      DataOwner: boolean = true): IResponseParse;
+  end;
+
+implementation
+
+{ TDelphiParse }
+
+function TDelphiParse.Delete(const ParamsUrl: array of string;
+  ObjectJson: TJSONValue; QueryParams: TDictionary<string, string>;
+  DataOwner: boolean): IResponseParse;
+begin
+
+end;
+
+function TDelphiParse.Get(const ParamsUrl: array of string;
+  ObjectJson: TJSONValue; QueryParams: TDictionary<string, string>;
+  DataOwner: boolean): IResponseParse;
+begin
+
+end;
+
+function TDelphiParse.Post(const ParamsUrl: array of string;
+  ObjectJson: TJSONValue; QueryParams: TDictionary<string, string>;
+  DataOwner: boolean): IResponseParse;
+begin
+
+end;
+
+function TDelphiParse.Put(const ParamsUrl: array of string;
+  ObjectJson: TJSONValue; QueryParams: TDictionary<string, string>;
+  DataOwner: boolean): IResponseParse;
+begin
+
+end;
+
+end.

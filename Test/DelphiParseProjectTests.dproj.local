@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/09/08 10:23:20.000.344,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Test\Unit1.pas</Transaction>
+    <Transaction>2016/09/08 10:23:34.000.643,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Test\Unit1.pas=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Test\TestQuery.pas</Transaction>
+    <Transaction>2016/09/08 10:25:47.000.193,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\source\DelphiParse.Query.pas</Transaction>
+    <Transaction>2016/09/08 18:11:04.000.614,=F:\Delphi10\Projetos\Parse\Test\Unit1.pas</Transaction>
+    <Transaction>2016/09/08 18:11:19.000.885,F:\Delphi10\Projetos\Parse\source\DelphiParse.Utils.pas=F:\Delphi10\Projetos\Parse\Test\Unit1.pas</Transaction>
+    <Transaction>2016/09/09 13:59:33.447,=F:\Delphi10\Projetos\Parse\source\DelphiParse.Interfaces.pas</Transaction>
+  </Transactions>
+</BorlandProject>

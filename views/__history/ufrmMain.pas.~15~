@@ -1,0 +1,58 @@
+unit ufrmMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  DelphiParse.Interfaces, DelphiParse.Objects;
+
+type
+  TForm1 = class(TForm)
+    memResult: TMemo;
+    Panel1: TPanel;
+    editUser: TEdit;
+    editMessage: TEdit;
+    btnSend: TButton;
+    btnGetAll: TButton;
+    Button1: TButton;
+    procedure btnSendClick(Sender: TObject);
+    procedure btnGetAllClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btnGetAllClick(Sender: TObject);
+var
+  Parse: IParseObject;
+  Resultado: string;
+begin
+  Parse := TParseObjects.Create('Mensagens');
+  Resultado := Parse.GetAllInBackGround();
+  memResult.Lines.Clear;
+  memResult.Lines.Add(Resultado);
+end;
+
+procedure TForm1.btnSendClick(Sender: TObject);
+var
+  Parse: IParseObject;
+  Resultado: string;
+begin
+  Parse := TParseObjects.Create('Mensagens');
+  Parse.Add('username', editUser.Text);
+  Parse.Add('mensagem', editMessage.Text);
+  Resultado := Parse.SaveInBackGround();
+  memResult.Lines.Clear;
+  memResult.Lines.Add(Resultado);
+end;
+
+end.

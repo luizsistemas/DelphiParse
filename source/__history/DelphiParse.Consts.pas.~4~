@@ -1,0 +1,13 @@
+unit DelphiParse.Consts;
+
+interface
+
+const
+  BASE_URL = 'https://parseapi.back4app.com';
+  APP_ID = 'gVUK0NblvGufHwx1Axk56pJtsZMv2DHiYZKxOXPG';
+  REST_KEY = 'Ply7Q3t5A1a1G3XI4wxQflzfUGsG68k5Vjg5uyzQ';
+  VERSAO = '1';
+
+implementation
+
+end.

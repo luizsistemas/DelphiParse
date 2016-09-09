@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{63683870-3B7F-459D-96B2-AE7AB36279D0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DelphiParseProject.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test\DelphiParseProjectTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DelphiParseProject">
+        <MSBuild Projects="DelphiParseProject.dproj"/>
+    </Target>
+    <Target Name="DelphiParseProject:Clean">
+        <MSBuild Projects="DelphiParseProject.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiParseProject:Make">
+        <MSBuild Projects="DelphiParseProject.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DelphiParseProjectTests">
+        <MSBuild Projects="Test\DelphiParseProjectTests.dproj"/>
+    </Target>
+    <Target Name="DelphiParseProjectTests:Clean">
+        <MSBuild Projects="Test\DelphiParseProjectTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiParseProjectTests:Make">
+        <MSBuild Projects="Test\DelphiParseProjectTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DelphiParseProject;DelphiParseProjectTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DelphiParseProject:Clean;DelphiParseProjectTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DelphiParseProject:Make;DelphiParseProjectTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

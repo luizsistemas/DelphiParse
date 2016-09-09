@@ -1,0 +1,237 @@
+
+--------------------------------2016/9/8 8:57:13--------------------------------
+A memory block has been leaked. The size is: 52
+
+This block was allocated by thread 0x1F1C, and the stack trace (return addresses) at the time was:
+406C32 [System.pas][System][@GetMem$qqri][4596]
+409927 [System.pas][System][@NewUnicodeString$qqri][24451]
+409B58 [System.pas][System][@UStrFromPWCharLen$qqrr20System.UnicodeStringpbi][25121]
+430470 [System.SysUtils.pas][System.SysUtils][Sysutils.TStringBuilder.ToString$qqrv][26724]
+5E8858 [System.JSON.pas][System.JSON][Json.TJSONString.Value$qqrv][1569]
+645A8B [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.PopulateFields$qqrp23System.Json.TJSONObjectp14System.TObjectp42Rest.Jsonreflect.TJSONPopulationCustomizer][2898]
+642C45 [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.CreateObject$qqrp17System.TMetaClassp23System.Json.TJSONObjectp14System.TObject][2254]
+6683E3 [REST.Json][Json.TJson.ProcessOptions$qqrp23System.Json.TJSONObject48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%]
+66904F [REST.Json.pas][ufrmMain][TJson.%JsonToObject$p18Mensagem.TMensagem%$qqrp23System.Json.TJSONObject48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%$p18Mensagem.TMensagem][194]
+407F4E [System.pas][System][@AsClass$qqrxp14System.TObjectp17System.TMetaClass][16674]
+668F64 [REST.Json.pas][ufrmMain][TJson.%JsonToObject$p18Mensagem.TMensagem%$qqr20System.UnicodeString48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%$p18Mensagem.TMensagem][127]
+
+The block is currently used for an object of class: UnicodeString
+
+The allocation number is: 9878
+
+Current memory dump of 256 bytes starting at pointer address 7FD39C20:
+B0 04 02 00 01 00 00 00 0E 00 00 00 4F 00 6C 00 E1 00 20 00 43 00 61 00 72 00 61 00 2C 00 20 00
+62 00 6C 00 7A 00 3F 00 00 00 0B 73 1A 79 80 80 80 80 80 80 80 80 80 80 00 00 00 00 01 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 96 27 00 00 32 6C 40 00 AB 7A 40 00 B6 82 40 00
+4F E7 46 00 23 7F 40 00 D0 C3 45 00 FA C4 45 00 16 93 45 00 0D 92 45 00 E7 69 45 00 FE 69 45 00
+1C 1F 00 00 1C 1F 00 00 4E 6C 40 00 C9 7A 40 00 01 83 40 00 58 E9 46 00 4B 7C 40 00 5E C4 45 00
+FA C4 45 00 16 93 45 00 0D 92 45 00 E7 69 45 00 FE 69 45 00 34 00 00 00 74 FC 45 00 C8 A2 EE 85
+94 12 68 00 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80
+80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 37 5D 11 7A 00 00 00 00 00 00 00 00
+∞  .  .  .  .  .  .  .  .  .  .  .  O  .  l  .  ·  .     .  C  .  a  .  r  .  a  .  ,  .     .
+b  .  l  .  z  .  ?  .  .  .  .  s  .  y  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  .  .  .  .  .  .  .  .
+.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ñ  '  .  .  2  l  @  .  ´  z  @  .  ∂  Ç  @  .
+O  Á  F  .  #    @  .  –  √  E  .  ˙  ƒ  E  .  .  ì  E  .  .  í  E  .  Á  i  E  .  ˛  i  E  .
+.  .  .  .  .  .  .  .  N  l  @  .  …  z  @  .  .  É  @  .  X  È  F  .  K  |  @  .  ^  ƒ  E  .
+˙  ƒ  E  .  .  ì  E  .  .  í  E  .  Á  i  E  .  ˛  i  E  .  4  .  .  .  t  ¸  E  .  »  ¢  Ó  Ö
+î  .  h  .  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä
+Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  7  ]  .  z  .  .  .  .  .  .  .  .
+
+--------------------------------2016/9/8 8:57:13--------------------------------
+A memory block has been leaked. The size is: 36
+
+This block was allocated by thread 0x1F1C, and the stack trace (return addresses) at the time was:
+406C32 [System.pas][System][@GetMem$qqri][4596]
+409927 [System.pas][System][@NewUnicodeString$qqri][24451]
+409B58 [System.pas][System][@UStrFromPWCharLen$qqrr20System.UnicodeStringpbi][25121]
+430470 [System.SysUtils.pas][System.SysUtils][Sysutils.TStringBuilder.ToString$qqrv][26724]
+5E8858 [System.JSON.pas][System.JSON][Json.TJSONString.Value$qqrv][1569]
+645A8B [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.PopulateFields$qqrp23System.Json.TJSONObjectp14System.TObjectp42Rest.Jsonreflect.TJSONPopulationCustomizer][2898]
+642C45 [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.CreateObject$qqrp17System.TMetaClassp23System.Json.TJSONObjectp14System.TObject][2254]
+6683E3 [REST.Json][Json.TJson.ProcessOptions$qqrp23System.Json.TJSONObject48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%]
+66904F [REST.Json.pas][ufrmMain][TJson.%JsonToObject$p18Mensagem.TMensagem%$qqrp23System.Json.TJSONObject48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%$p18Mensagem.TMensagem][194]
+407F4E [System.pas][System][@AsClass$qqrxp14System.TObjectp17System.TMetaClass][16674]
+668F64 [REST.Json.pas][ufrmMain][TJson.%JsonToObject$p18Mensagem.TMensagem%$qqr20System.UnicodeString48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%$p18Mensagem.TMensagem][127]
+
+The block is currently used for an object of class: UnicodeString
+
+The allocation number is: 9773
+
+Current memory dump of 256 bytes starting at pointer address 7FE07D50:
+B0 04 02 00 01 00 00 00 06 00 00 00 4D 00 61 00 72 00 63 00 6F 00 73 00 00 00 33 57 4F 78 80 80
+80 80 80 80 80 80 80 80 00 00 00 00 C1 90 E0 7F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+66 25 00 00 32 6C 40 00 AB 7A 40 00 B6 82 40 00 F1 4D 46 00 C5 8D 46 00 68 8F 45 00 3A C3 45 00
+D9 C4 45 00 16 93 45 00 89 6E 64 00 33 2C 64 00 1C 1F 00 00 1C 1F 00 00 4E 6C 40 00 C9 7A 40 00
+01 83 40 00 B9 90 45 00 C9 7A 40 00 01 83 40 00 4B 7C 40 00 72 FC 46 00 69 8D 46 00 4B 7C 40 00
+B7 8E 45 00 1C 00 00 00 58 B7 45 00 EB 2C 30 86 94 12 68 00 80 80 80 80 80 80 80 80 80 80 80 80
+80 80 80 80 80 80 80 80 80 80 80 80 14 D3 CF 79 80 80 80 80 80 80 80 80 00 00 00 00 81 9E E0 7F
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 65 25 00 00 32 6C 40 00 AB 7A 40 00 B6 82 40 00
+∞  .  .  .  .  .  .  .  .  .  .  .  M  .  a  .  r  .  c  .  o  .  s  .  .  .  3  W  O  x  Ä  Ä
+Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  .  .  .  .  ¡  ê  ‡    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+f  %  .  .  2  l  @  .  ´  z  @  .  ∂  Ç  @  .  Ò  M  F  .  ≈  ç  F  .  h  è  E  .  :  √  E  .
+Ÿ  ƒ  E  .  .  ì  E  .  â  n  d  .  3  ,  d  .  .  .  .  .  .  .  .  .  N  l  @  .  …  z  @  .
+.  É  @  .  π  ê  E  .  …  z  @  .  .  É  @  .  K  |  @  .  r  ¸  F  .  i  ç  F  .  K  |  @  .
+∑  é  E  .  .  .  .  .  X  ∑  E  .  Î  ,  0  Ü  î  .  h  .  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä
+Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  .  ”  œ  y  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  .  .  .  .  Å  û  ‡  
+.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  e  %  .  .  2  l  @  .  ´  z  @  .  ∂  Ç  @  .
+
+--------------------------------2016/9/8 8:57:13--------------------------------
+A memory block has been leaked. The size is: 36
+
+This block was allocated by thread 0x1F1C, and the stack trace (return addresses) at the time was:
+406C32 [System.pas][System][@GetMem$qqri][4596]
+407AAB [System.pas][System][TObject.NewInstance$qqrv][16178]
+4082B6 [System.pas][System][@ClassCreate$qqrpvzc][17493]
+407C1C [System.pas][System][TObject.$bctr$qqrv][16242]
+463DD8 [System.Rtti.pas][System.Rtti][PutArg][7591]
+463CB0 [System.Rtti.pas][System.Rtti][Rtti.RawInvoke$qqrpvp23System.Rtti.TParamBlock][7481]
+4640B4 [System.Rtti.pas][System.Rtti][Rtti.Invoke$qqrpvx42System.%DynamicArray$18System.Rtti.TValue%24System.Typinfo.TCallConvp24System.Typinfo.TTypeInfooo][7703]
+45B2F0 [System.Rtti.pas][System.Rtti][Rtti.TRttiInstanceMethodEx.DispatchInvoke$qqrrx18System.Rtti.TValuepx18System.Rtti.TValuexi][5653]
+4644CF [System.Rtti.pas][System.Rtti][Rtti.TRttiMethod.Invoke$qqrp17System.TMetaClasspx18System.Rtti.TValuexi][8618]
+64452D [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.ObjectInstance$qqr24System.Rtti.TRttiContext20System.UnicodeString][2632]
+406C4E [System.pas][System][@FreeMem$qqrpv][4644]
+
+The block is currently used for an object of class: TMensagem
+
+The allocation number is: 9556
+
+Current memory dump of 256 bytes starting at pointer address 7FE0A5E0:
+D0 22 63 00 00 00 00 00 D0 BF FB 76 AE CF E4 40 00 00 00 00 00 00 00 00 5C 7D E0 7F 2C 9C D3 7F
+00 00 00 00 38 09 B0 79 00 00 00 00 51 8D E0 7F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+B9 24 00 00 32 6C 40 00 AB 7A 40 00 B6 82 40 00 03 AA 45 00 68 8F 45 00 72 BE 45 00 46 C0 45 00
+23 BD 45 00 9E 98 45 00 CA 44 64 00 4E 6C 40 00 1C 1F 00 00 1C 1F 00 00 4E 6C 40 00 C9 7A 40 00
+01 83 40 00 81 41 46 00 4B 7C 40 00 72 FC 46 00 69 8D 46 00 4B 7C 40 00 B7 8E 45 00 56 5B 46 00
+4B 7C 40 00 24 00 00 00 90 A8 45 00 A6 6E 11 86 94 12 68 00 80 80 80 80 80 80 80 80 80 80 80 80
+80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 59 91 EE 79 00 00 00 00 F1 8B E0 7F
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 31 25 00 00 32 6C 40 00 27 99 40 00 58 9B 40 00
+–  "  c  .  .  .  .  .  –  ø  ˚  v  Æ  œ  ‰  @  .  .  .  .  .  .  .  .  \  }  ‡    ,  ú  ”  
+.  .  .  .  8  .  ∞  y  .  .  .  .  Q  ç  ‡    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+π  $  .  .  2  l  @  .  ´  z  @  .  ∂  Ç  @  .  .  ™  E  .  h  è  E  .  r  æ  E  .  F  ¿  E  .
+#  Ω  E  .  û  ò  E  .     D  d  .  N  l  @  .  .  .  .  .  .  .  .  .  N  l  @  .  …  z  @  .
+.  É  @  .  Å  A  F  .  K  |  @  .  r  ¸  F  .  i  ç  F  .  K  |  @  .  ∑  é  E  .  V  [  F  .
+K  |  @  .  $  .  .  .  ê  ®  E  .  ¶  n  .  Ü  î  .  h  .  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä
+Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Y  ë  Ó  y  .  .  .  .  Ò  ã  ‡  
+.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  1  %  .  .  2  l  @  .  '  ô  @  .  X  õ  @  .
+
+--------------------------------2016/9/8 8:57:13--------------------------------
+A memory block has been leaked. The size is: 36
+
+This block was allocated by thread 0x1F1C, and the stack trace (return addresses) at the time was:
+406C32 [System.pas][System][@GetMem$qqri][4596]
+407AAB [System.pas][System][TObject.NewInstance$qqrv][16178]
+4082B6 [System.pas][System][@ClassCreate$qqrpvzc][17493]
+407C1C [System.pas][System][TObject.$bctr$qqrv][16242]
+463DD8 [System.Rtti.pas][System.Rtti][PutArg][7591]
+463CB0 [System.Rtti.pas][System.Rtti][Rtti.RawInvoke$qqrpvp23System.Rtti.TParamBlock][7481]
+4640B4 [System.Rtti.pas][System.Rtti][Rtti.Invoke$qqrpvx42System.%DynamicArray$18System.Rtti.TValue%24System.Typinfo.TCallConvp24System.Typinfo.TTypeInfooo][7703]
+45B2F0 [System.Rtti.pas][System.Rtti][Rtti.TRttiInstanceMethodEx.DispatchInvoke$qqrrx18System.Rtti.TValuepx18System.Rtti.TValuexi][5653]
+4644CF [System.Rtti.pas][System.Rtti][Rtti.TRttiMethod.Invoke$qqrp17System.TMetaClasspx18System.Rtti.TValuexi][8618]
+64452D [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.ObjectInstance$qqr24System.Rtti.TRttiContext20System.UnicodeString][2632]
+406C4E [System.pas][System][@FreeMem$qqrpv][4644]
+
+The block is currently used for an object of class: TMensagem
+
+The allocation number is: 5188
+
+Current memory dump of 256 bytes starting at pointer address 7FE0AF80:
+D0 22 63 00 00 00 00 00 8E 02 BA 73 9D CF E4 40 00 00 00 00 00 00 00 00 3C B0 E0 7F 6C 05 E8 7F
+00 00 00 00 B6 6C D8 7C 00 00 00 00 10 73 E0 7F 00 00 00 00 00 00 00 00 A0 66 41 00 00 00 00 00
+1D 15 00 00 32 6C 40 00 27 99 40 00 58 9B 40 00 70 04 43 00 58 88 5E 00 8B 5A 64 00 45 2C 64 00
+E3 83 66 00 4F 90 66 00 4E 7F 40 00 64 8F 66 00 1C 1F 00 00 1C 1F 00 00 4E 6C 40 00 46 9A 40 00
+87 31 64 00 B7 21 64 00 67 52 64 00 45 2C 64 00 E3 83 66 00 4F 90 66 00 4E 7F 40 00 64 8F 66 00
+9E 89 66 00 16 00 00 00 B0 04 02 00 98 CA B0 87 B0 04 02 00 01 00 00 00 04 00 00 00 6C 00 75 00
+69 00 7A 00 00 00 67 35 4F 78 80 80 80 80 80 80 80 80 80 80 80 80 80 80 00 00 00 00 81 88 E0 7F
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 D0 24 00 00 32 6C 40 00 27 99 40 00 58 9B 40 00
+–  "  c  .  .  .  .  .  é  .  ∫  s  ù  œ  ‰  @  .  .  .  .  .  .  .  .  <  ∞  ‡    l  .  Ë  
+.  .  .  .  ∂  l  ÿ  |  .  .  .  .  .  s  ‡    .  .  .  .  .  .  .  .  †  f  A  .  .  .  .  .
+.  .  .  .  2  l  @  .  '  ô  @  .  X  õ  @  .  p  .  C  .  X  à  ^  .  ã  Z  d  .  E  ,  d  .
+„  É  f  .  O  ê  f  .  N    @  .  d  è  f  .  .  .  .  .  .  .  .  .  N  l  @  .  F  ö  @  .
+á  1  d  .  ∑  !  d  .  g  R  d  .  E  ,  d  .  „  É  f  .  O  ê  f  .  N    @  .  d  è  f  .
+û  â  f  .  .  .  .  .  ∞  .  .  .  ò     ∞  á  ∞  .  .  .  .  .  .  .  .  .  .  .  l  .  u  .
+i  .  z  .  .  .  g  5  O  x  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  .  .  .  .  Å  à  ‡  
+.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  –  $  .  .  2  l  @  .  '  ô  @  .  X  õ  @  .
+
+--------------------------------2016/9/8 8:57:13--------------------------------
+A memory block has been leaked. The size is: 36
+
+This block was allocated by thread 0x1F1C, and the stack trace (return addresses) at the time was:
+406C32 [System.pas][System][@GetMem$qqri][4596]
+409927 [System.pas][System][@NewUnicodeString$qqri][24451]
+409B58 [System.pas][System][@UStrFromPWCharLen$qqrr20System.UnicodeStringpbi][25121]
+430470 [System.SysUtils.pas][System.SysUtils][Sysutils.TStringBuilder.ToString$qqrv][26724]
+5E8858 [System.JSON.pas][System.JSON][Json.TJSONString.Value$qqrv][1569]
+645A8B [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.PopulateFields$qqrp23System.Json.TJSONObjectp14System.TObjectp42Rest.Jsonreflect.TJSONPopulationCustomizer][2898]
+642C45 [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.CreateObject$qqrp17System.TMetaClassp23System.Json.TJSONObjectp14System.TObject][2254]
+6683E3 [REST.Json][Json.TJson.ProcessOptions$qqrp23System.Json.TJSONObject48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%]
+66904F [REST.Json.pas][ufrmMain][TJson.%JsonToObject$p18Mensagem.TMensagem%$qqrp23System.Json.TJSONObject48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%$p18Mensagem.TMensagem][194]
+407F4E [System.pas][System][@AsClass$qqrxp14System.TObjectp17System.TMetaClass][16674]
+668F64 [REST.Json.pas][ufrmMain][TJson.%JsonToObject$p18Mensagem.TMensagem%$qqr20System.UnicodeString48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%$p18Mensagem.TMensagem][127]
+
+The block is currently used for an object of class: UnicodeString
+
+The allocation number is: 5405
+
+Current memory dump of 256 bytes starting at pointer address 7FE0B030:
+B0 04 02 00 01 00 00 00 04 00 00 00 6C 00 75 00 69 00 7A 00 00 00 67 35 4F 78 80 80 80 80 80 80
+80 80 80 80 80 80 80 80 00 00 00 00 81 88 E0 7F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+D0 24 00 00 32 6C 40 00 27 99 40 00 58 9B 40 00 E1 DA 40 00 CE 77 BD 76 6C C4 84 77 BF 7B D7 76
+88 7C D7 76 D0 93 85 77 88 7C D7 76 15 91 BA 76 1C 1F 00 00 1C 1F 00 00 4E 6C 40 00 E1 99 40 00
+E9 AE 40 00 31 AE 40 00 C3 7C 40 00 C2 7A 40 00 01 83 40 00 B9 90 45 00 C9 7A 40 00 01 83 40 00
+4B 7C 40 00 16 00 00 00 B0 04 02 00 4B 52 B9 C4 94 12 68 00 80 80 80 80 80 80 80 80 80 80 80 80
+80 80 80 80 80 80 B4 AD 46 3B 80 80 80 80 80 80 80 80 80 80 80 80 80 80 00 00 00 00 D1 A8 E0 7F
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 9A 24 00 00 32 6C 40 00 AB 7A 40 00 B6 82 40 00
+∞  .  .  .  .  .  .  .  .  .  .  .  l  .  u  .  i  .  z  .  .  .  g  5  O  x  Ä  Ä  Ä  Ä  Ä  Ä
+Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  .  .  .  .  Å  à  ‡    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+–  $  .  .  2  l  @  .  '  ô  @  .  X  õ  @  .  ·  ⁄  @  .  Œ  w  Ω  v  l  ƒ  Ñ  w  ø  {  ◊  v
+à  |  ◊  v  –  ì  Ö  w  à  |  ◊  v  .  ë  ∫  v  .  .  .  .  .  .  .  .  N  l  @  .  ·  ô  @  .
+È  Æ  @  .  1  Æ  @  .  √  |  @  .  ¬  z  @  .  .  É  @  .  π  ê  E  .  …  z  @  .  .  É  @  .
+K  |  @  .  .  .  .  .  ∞  .  .  .  K  R  π  ƒ  î  .  h  .  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä
+Ä  Ä  Ä  Ä  Ä  Ä  ¥  ≠  F  ;  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  .  .  .  .  —  ®  ‡  
+.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ö  $  .  .  2  l  @  .  ´  z  @  .  ∂  Ç  @  .
+
+--------------------------------2016/9/8 8:57:13--------------------------------
+A memory block has been leaked. The size is: 68
+
+This block was allocated by thread 0x1F1C, and the stack trace (return addresses) at the time was:
+406C32 [System.pas][System][@GetMem$qqri][4596]
+409927 [System.pas][System][@NewUnicodeString$qqri][24451]
+409B58 [System.pas][System][@UStrFromPWCharLen$qqrr20System.UnicodeStringpbi][25121]
+430470 [System.SysUtils.pas][System.SysUtils][Sysutils.TStringBuilder.ToString$qqrv][26724]
+5E8858 [System.JSON.pas][System.JSON][Json.TJSONString.Value$qqrv][1569]
+645A8B [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.PopulateFields$qqrp23System.Json.TJSONObjectp14System.TObjectp42Rest.Jsonreflect.TJSONPopulationCustomizer][2898]
+642C45 [REST.JsonReflect.pas][REST.JsonReflect][Jsonreflect.TJSONUnMarshal.CreateObject$qqrp17System.TMetaClassp23System.Json.TJSONObjectp14System.TObject][2254]
+6683E3 [REST.Json][Json.TJson.ProcessOptions$qqrp23System.Json.TJSONObject48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%]
+66904F [REST.Json.pas][ufrmMain][TJson.%JsonToObject$p18Mensagem.TMensagem%$qqrp23System.Json.TJSONObject48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%$p18Mensagem.TMensagem][194]
+407F4E [System.pas][System][@AsClass$qqrxp14System.TObjectp17System.TMetaClass][16674]
+668F64 [REST.Json.pas][ufrmMain][TJson.%JsonToObject$p18Mensagem.TMensagem%$qqr20System.UnicodeString48System.%Set$21Rest.Json.TJsonOptiont1$i0$t1$i6$%$p18Mensagem.TMensagem][127]
+
+The block is currently used for an object of class: UnicodeString
+
+The allocation number is: 5510
+
+Current memory dump of 256 bytes starting at pointer address 7FE80560:
+B0 04 02 00 01 00 00 00 14 00 00 00 74 00 75 00 64 00 6F 00 20 00 6A 00 F3 00 69 00 61 00 2C 00
+20 00 65 00 20 00 63 00 6F 00 6D 00 20 00 76 00 63 00 3F 00 00 00 E1 18 6B 78 80 80 80 80 80 80
+80 80 80 80 80 80 80 80 00 00 00 00 61 0B E8 7F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+18 24 00 00 32 6C 40 00 27 99 40 00 42 A8 40 00 3E 5F 46 00 1A 60 46 00 78 5B 46 00 96 6B 45 00
+24 8E 45 00 14 44 64 00 B2 44 64 00 4E 6C 40 00 1C 1F 00 00 1C 1F 00 00 E1 99 40 00 E9 AE 40 00
+31 AE 40 00 31 AF 40 00 E7 BC 40 00 46 A9 46 00 16 A7 46 00 4B 7C 40 00 4B 5B 46 00 4B 7C 40 00
+99 60 45 00 36 00 00 00 B0 04 02 00 08 8C F0 85 94 12 68 00 80 80 80 80 80 80 80 80 80 80 80 80
+80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80
+∞  .  .  .  .  .  .  .  .  .  .  .  t  .  u  .  d  .  o  .     .  j  .  Û  .  i  .  a  .  ,  .
+   .  e  .     .  c  .  o  .  m  .     .  v  .  c  .  ?  .  .  .  ·  .  k  x  Ä  Ä  Ä  Ä  Ä  Ä
+Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  .  .  .  .  a  .  Ë    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+.  $  .  .  2  l  @  .  '  ô  @  .  B  ®  @  .  >  _  F  .  .  `  F  .  x  [  F  .  ñ  k  E  .
+$  é  E  .  .  D  d  .  ≤  D  d  .  N  l  @  .  .  .  .  .  .  .  .  .  ·  ô  @  .  È  Æ  @  .
+1  Æ  @  .  1  Ø  @  .  Á  º  @  .  F  ©  F  .  .  ß  F  .  K  |  @  .  K  [  F  .  K  |  @  .
+ô  `  E  .  6  .  .  .  ∞  .  .  .  .  å    Ö  î  .  h  .  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä
+Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä  Ä
+
+--------------------------------2016/9/8 8:57:13--------------------------------
+This application has leaked memory. The small block leaks are (excluding expected leaks registered by pointer):
+
+21 - 36 bytes: TMensagem x 2, UnicodeString x 2
+37 - 52 bytes: UnicodeString x 1
+53 - 68 bytes: UnicodeString x 1
+
+Note: Memory leak detail is logged to a text file in the same folder as this application. To disable this memory leak check, undefine "EnableMemoryLeakReporting".

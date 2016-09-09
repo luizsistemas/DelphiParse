@@ -1,0 +1,23 @@
+unit Mensagem;
+
+interface
+
+type
+  TMensagem = class
+  private
+    FId: string;
+    FCreatedAt: TDateTime;
+    FUpdateAt: TDateTime;
+    FUsername: string;
+    FMensagem: string;
+  public
+    property ObjectId: string read FId write FId;
+    property CreatedAt: TDateTime read FCreatedAt write FCreatedAt;
+    property UpdatedAt: TDateTime read FUpdateAt write FUpdateAt;
+    property Username: string read FUsername write FUsername;
+    property Mensagem: string read FMensagem write FMensagem;
+  end;
+
+implementation
+
+end.

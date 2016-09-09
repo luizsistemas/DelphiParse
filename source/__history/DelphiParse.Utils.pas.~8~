@@ -1,0 +1,33 @@
+unit DelphiParse.Utils;
+
+interface
+
+function SepElements(Separator: String; Elements: Array of string): string;
+
+implementation
+
+uses System.SysUtils;
+
+function SepElements(Separator: String; Elements: Array of string): string;
+var
+  NewArray: Array of string;
+  I, ArrLength: Integer;
+begin
+  if Length(Elements) = 0 then
+  begin
+    Result := '';
+    Exit;
+  end;
+  ArrLength := 0;
+  for I := Low(Elements) to High(Elements) do
+  begin
+    if Elements[I] = '' then
+      Continue;
+    Inc(ArrLength);
+    SetLength(NewArray, ArrLength);
+    NewArray[ArrLength - 1] := Elements[I];
+  end;
+  Result := String.Join(Separator, NewArray);
+end;
+
+end.

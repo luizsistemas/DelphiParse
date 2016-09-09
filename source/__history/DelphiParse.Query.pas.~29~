@@ -1,0 +1,154 @@
+unit DelphiParse.Query;
+
+interface
+
+uses System.Generics.Collections, System.SysUtils;
+
+type
+  ExceptionParseKeyExists = class(Exception);
+
+  TParseQuery = class
+  private
+    EqualToParams: TDictionary<string, string>;
+    StartsWithParams: TDictionary<string, string>;
+    ContainsParams: TDictionary<string, string>;
+    ParamsFormatados: string;
+    function FormatEqualTo: string;
+    function FormatStartsWith: string;
+    function FormatContains: string;
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    function Count: Integer;
+
+    //where
+    procedure WhereEqualTo(Key, Value: string);
+    procedure WhereStartsWith(Key, Value: string);
+    procedure WhereContains(Key, Value: string);
+
+    //formatted
+    function GetParamsFormatted: string;
+  end;
+
+implementation
+
+{ TParseQuery }
+
+uses DelphiParse.Utils, Dialogs;
+
+function TParseQuery.Count: Integer;
+begin
+  Result := EqualToParams.Count +
+            StartsWithParams.Count +
+            ContainsParams.Count;
+end;
+
+constructor TParseQuery.Create;
+begin
+  inherited;
+  EqualToParams := TDictionary<string, string>.Create;
+  StartsWithParams := TDictionary<string,string>.Create;
+  ContainsParams := TDictionary<string,string>.Create;
+end;
+
+destructor TParseQuery.Destroy;
+begin
+  EqualToParams.Free;
+  StartsWithParams.Free;
+  ContainsParams.Free;
+  inherited;
+end;
+
+function TParseQuery.FormatEqualTo: string;
+var
+  Key, Value: string;
+begin
+  if EqualToParams.Count = 0 then
+    Exit;
+
+  for Key in EqualToParams.Keys do
+  begin
+    Value := EqualToParams.Items[Key];
+    if Result <> '' then
+      Result := Result + ',';
+    Result := Result + Format('"%s":"%s"', [Key,Value]);
+  end;
+end;
+
+function TParseQuery.FormatStartsWith: string;
+var
+  Key, Value: string;
+begin
+  if StartsWithParams.Count = 0 then
+    Exit;
+
+  for Key in StartsWithParams.Keys do
+  begin
+    Value := StartsWithParams.Items[Key];
+    if Result <> '' then
+      Result := Result + ',';
+    Result := Result + Format('"%s":{"$regex":"^%s"}', [Key,Value]);
+  end;
+end;
+
+function TParseQuery.FormatContains: string;
+var
+  Key, Value: string;
+begin
+  if ContainsParams.Count = 0 then
+    Exit;
+
+  for Key in ContainsParams.Keys do
+  begin
+    Value := ContainsParams.Items[Key];
+    if Result <> '' then
+      Result := Result + ',';
+    Result := Result + Format('"%s":{"$regex":"%s"}', [Key,Value]);
+  end;
+end;
+
+function TParseQuery.GetParamsFormatted: string;
+var
+  Formatos: Array[0..2] of string;
+  Formato, Texto: string;
+begin
+  if Count = 0 then
+  begin
+    Result := '';
+    Exit;
+  end;
+  Formatos[0] := FormatEqualTo;
+  Formatos[1] := FormatStartsWith;
+  Formatos[2] := FormatContains;
+  Texto := GetElementsNotEmpty(',', Formatos);
+  Result := Format('where={%s}', [Texto]);
+end;
+
+procedure TParseQuery.WhereContains(Key, Value: string);
+begin
+  try
+    if ContainsParams.ContainsKey(Key) then
+      raise ExceptionParseKeyExists.Create('Já existe Key com este nome');
+    ContainsParams.Add(Key, Value);
+  except
+    on e: ExceptionParseKeyExists do
+      ShowMessage(e.Message);
+  end;
+end;
+
+procedure TParseQuery.WhereEqualTo(Key, Value: string);
+begin
+  if EqualToParams.ContainsKey(Key) then
+    raise Exception.Create('Já existe Key com este nome');
+  EqualToParams.Add(Key, Value);
+end;
+
+procedure TParseQuery.WhereStartsWith(Key, Value: string);
+begin
+  if StartsWithParams.ContainsKey(Key) then
+    raise Exception.Create('Já existe Key com este nome');
+  StartsWithParams.Add(Key, Value);
+end;
+
+end.

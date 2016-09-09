@@ -1,0 +1,137 @@
+unit DelphiParse.Libraries;
+
+interface
+
+uses DelphiParse.Interfaces, System.JSON,
+  System.SysUtils, System.Generics.Collections;
+
+type
+  TParseVerbs = (pvPost, pvGet, pvPut, pvDelete);
+
+  TDelphiParse = class(TInterfacedObject, IDelphiParse)
+  private
+    BaseUrl: string;
+    Versao: string;
+    AppId: string;
+    RESTApiKey: string;
+
+    function Send(const ParamsUrl: array of string;
+      const Command: TParseVerbs; ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil;
+      DataOwner: boolean = true): IResponseParse;
+  public
+    constructor Create(ABaseUrl, AVersao, AAppId, ARESTApiKey: string) reintroduce;
+
+    function Post(const ParamsUrl: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil;
+      DataOwner: boolean = true): IResponseParse;
+
+    function Get(const ParamsUrl: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil;
+      DataOwner: boolean = true): IResponseParse;
+
+    function Put(const ParamsUrl: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil;
+      DataOwner: boolean = true): IResponseParse;
+
+    function Delete(const ParamsUrl: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil;
+      DataOwner: boolean = true): IResponseParse;
+
+
+  end;
+
+implementation
+
+uses System.Net.HttpClient, System.Net.URLClient, System.Classes;
+
+{ TDelphiParse }
+
+constructor TDelphiParse.Create(ABaseUrl, AVersao, AAppId, ARESTApiKey: string);
+begin
+  inherited Create;
+  BaseUrl := ABaseUrl;
+
+end;
+
+function TDelphiParse.Delete(const ParamsUrl: array of string;
+  ObjectJson: TJSONValue; QueryParams: TDictionary<string, string>;
+  DataOwner: boolean): IResponseParse;
+begin
+
+end;
+
+function TDelphiParse.Get(const ParamsUrl: array of string;
+  ObjectJson: TJSONValue; QueryParams: TDictionary<string, string>;
+  DataOwner: boolean): IResponseParse;
+begin
+
+end;
+
+function TDelphiParse.Post(const ParamsUrl: array of string;
+  ObjectJson: TJSONValue; QueryParams: TDictionary<string, string>;
+  DataOwner: boolean): IResponseParse;
+begin
+
+end;
+
+function TDelphiParse.Put(const ParamsUrl: array of string;
+  ObjectJson: TJSONValue; QueryParams: TDictionary<string, string>;
+  DataOwner: boolean): IResponseParse;
+begin
+
+end;
+
+function TDelphiParse.Send(const ParamsUrl: array of string;
+  const Command: TParseVerbs; ObjectJson: TJSONValue;
+  QueryParams: TDictionary<string, string>;
+  DataOwner: boolean): IResponseParse;
+var
+  LClient: THTTPClient;
+  LResp: IHTTPResponse;
+  LURL: string;
+  LSource: TStringStream;
+begin
+  try
+    LClient := THTTPClient.Create;
+    try
+      LSource := nil;
+      if ObjectJson <> nil then
+        LSource := TStringStream.Create(ObjectJson.ToJSON);
+      try
+        LURL := BaseUri + EncodeResourceParams(AResourceParams) +
+          EncodeQueryParams(AQueryParams);
+        case ACommand of
+          fcSet:
+            LResp := LClient.Put(LURL, LSource);
+          fcPush:
+            LResp := LClient.Post(LURL, LSource);
+          fcUpdate:
+            LResp := LClient.Patch(LURL, LSource);
+          fcGet:
+            LResp := LClient.Get(LURL);
+          fcRemove:
+            LResp := LClient.Delete(LURL);
+        end;
+        Result := TFirebaseResponse.Create(LResp);
+      finally
+        if Assigned(LSource) then
+          LSource.Free;
+      end;
+    finally
+      LClient.Free;
+    end;
+  finally
+    if ADataOwner then
+    begin
+      if Assigned(AData) then
+        AData.Free;
+    end;
+  end;
+end;
+
+end.

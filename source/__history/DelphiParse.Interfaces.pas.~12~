@@ -1,0 +1,43 @@
+unit DelphiParse.Interfaces;
+
+interface
+
+uses System.JSON, System.SysUtils, System.Generics.Collections;
+
+type
+  IResponseParse = interface
+    ['{D356B879-8FAC-47BC-8946-7418497C1047}']
+    function ResponseAsString(const Encoding: TEncoding = nil): string;
+  end;
+
+  IDelphiParse = interface
+    ['{87E940B9-D2F8-4197-84D8-A84A426049BA}']
+    function Post(const UrlParams: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil): IResponseParse;
+
+    function Get(const UrlParams: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil): IResponseParse;
+
+    function Put(const UrlParams: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil): IResponseParse;
+
+    function Delete(const UrlParams: array of string;
+      ObjectJson: TJSONValue = nil;
+      QueryParams: TDictionary<string, string> = nil): IResponseParse;
+  end;
+
+  IParseObject = interface
+    ['{A6616D36-B794-46DC-BBC9-51CF0AC18E5F}']
+
+    procedure Add(Key, Value: Variant); overload;
+
+    function SaveInBackGround(): IResponseParse;
+    function DeleteInBackGround(ObjectId: string): string;
+  end;
+
+implementation
+
+end.
