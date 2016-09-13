@@ -18,22 +18,24 @@ object frmMain: TfrmMain
     Left = 0
     Top = 0
     Width = 711
-    Height = 328
+    Height = 339
+    Align = alClient
     ScrollBars = ssVertical
     TabOrder = 0
+    ExplicitHeight = 328
   end
   object GroupBox2: TGroupBox
     Left = 0
-    Top = 335
+    Top = 339
     Width = 711
-    Height = 105
+    Height = 101
     Align = alBottom
     Caption = 'Messages'
     TabOrder = 1
-    ExplicitTop = 312
+    ExplicitTop = 338
     object btnGetAll: TButton
       Left = 264
-      Top = 75
+      Top = 71
       Width = 75
       Height = 25
       Caption = 'Get All'
@@ -43,7 +45,7 @@ object frmMain: TfrmMain
     end
     object btnEqual: TButton
       Left = 8
-      Top = 75
+      Top = 71
       Width = 75
       Height = 25
       Caption = 'EqualTo'
@@ -53,7 +55,7 @@ object frmMain: TfrmMain
     end
     object btnStartsWith: TButton
       Left = 88
-      Top = 75
+      Top = 71
       Width = 75
       Height = 25
       Caption = 'StartsWith'
@@ -63,7 +65,7 @@ object frmMain: TfrmMain
     end
     object btnContains: TButton
       Left = 168
-      Top = 75
+      Top = 71
       Width = 89
       Height = 25
       Caption = 'Contains'
@@ -73,7 +75,7 @@ object frmMain: TfrmMain
     end
     object editEqual: TEdit
       Left = 8
-      Top = 50
+      Top = 46
       Width = 73
       Height = 21
       TabStop = False
@@ -82,7 +84,7 @@ object frmMain: TfrmMain
     end
     object editStarts: TEdit
       Left = 88
-      Top = 50
+      Top = 46
       Width = 75
       Height = 21
       TabStop = False
@@ -91,7 +93,7 @@ object frmMain: TfrmMain
     end
     object editContains: TEdit
       Left = 168
-      Top = 50
+      Top = 46
       Width = 89
       Height = 21
       TabStop = False
@@ -100,7 +102,7 @@ object frmMain: TfrmMain
     end
     object editUser: TEdit
       Left = 8
-      Top = 24
+      Top = 20
       Width = 121
       Height = 21
       TabOrder = 0
@@ -108,7 +110,7 @@ object frmMain: TfrmMain
     end
     object editMessage: TEdit
       Left = 136
-      Top = 24
+      Top = 20
       Width = 297
       Height = 21
       TabOrder = 1
@@ -116,7 +118,7 @@ object frmMain: TfrmMain
     end
     object btnSend: TButton
       Left = 440
-      Top = 24
+      Top = 20
       Width = 89
       Height = 21
       Caption = 'Send Message'
@@ -125,7 +127,7 @@ object frmMain: TfrmMain
     end
     object btnJsonToMemo: TButton
       Left = 344
-      Top = 75
+      Top = 71
       Width = 89
       Height = 25
       Caption = 'JsonToMemo'
@@ -135,7 +137,7 @@ object frmMain: TfrmMain
     end
     object btnJsonToObj: TButton
       Left = 438
-      Top = 75
+      Top = 71
       Width = 75
       Height = 25
       Caption = 'JsonToObj'
@@ -145,7 +147,7 @@ object frmMain: TfrmMain
     end
     object btnDelete: TButton
       Left = 536
-      Top = 24
+      Top = 20
       Width = 89
       Height = 21
       Caption = 'Delete Message'
