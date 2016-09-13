@@ -1,8 +1,9 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   Caption = 'Delphi x Parse'
-  ClientHeight = 478
+  ClientHeight = 490
   ClientWidth = 711
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,22 +18,88 @@ object frmMain: TfrmMain
     Left = 0
     Top = 0
     Width = 711
-    Height = 384
-    Align = alClient
+    Height = 328
     ScrollBars = ssVertical
     TabOrder = 0
-    ExplicitHeight = 400
   end
-  object Panel1: TPanel
+  object GroupBox2: TGroupBox
     Left = 0
-    Top = 384
+    Top = 312
     Width = 711
-    Height = 94
+    Height = 105
     Align = alBottom
+    Caption = 'Messages'
     TabOrder = 1
+    object btnGetAll: TButton
+      Left = 8
+      Top = 72
+      Width = 75
+      Height = 25
+      Caption = 'Get All'
+      TabOrder = 6
+      TabStop = False
+      OnClick = btnGetAllClick
+    end
+    object btnEqual: TButton
+      Left = 88
+      Top = 72
+      Width = 75
+      Height = 25
+      Caption = 'EqualTo'
+      TabOrder = 7
+      TabStop = False
+      OnClick = btnEqualClick
+    end
+    object btnStartsWith: TButton
+      Left = 168
+      Top = 72
+      Width = 75
+      Height = 25
+      Caption = 'StartsWith'
+      TabOrder = 8
+      TabStop = False
+      OnClick = btnStartsWithClick
+    end
+    object btnContains: TButton
+      Left = 248
+      Top = 72
+      Width = 89
+      Height = 25
+      Caption = 'Contains'
+      TabOrder = 9
+      TabStop = False
+      OnClick = btnContainsClick
+    end
+    object editEqual: TEdit
+      Left = 88
+      Top = 48
+      Width = 73
+      Height = 21
+      TabStop = False
+      TabOrder = 3
+      TextHint = 'Usu'#225'rio...'
+    end
+    object editStarts: TEdit
+      Left = 168
+      Top = 48
+      Width = 75
+      Height = 21
+      TabStop = False
+      TabOrder = 4
+      TextHint = 'Usu'#225'rio...'
+    end
+    object editContains: TEdit
+      Left = 248
+      Top = 48
+      Width = 89
+      Height = 21
+      TabStop = False
+      TabOrder = 5
+      TextHint = 'Mensagem...'
+    end
     object editUser: TEdit
       Left = 8
-      Top = 8
+      Top = 24
       Width = 121
       Height = 21
       TabOrder = 0
@@ -40,7 +107,7 @@ object frmMain: TfrmMain
     end
     object editMessage: TEdit
       Left = 136
-      Top = 8
+      Top = 24
       Width = 297
       Height = 21
       TabOrder = 1
@@ -48,99 +115,103 @@ object frmMain: TfrmMain
     end
     object btnSend: TButton
       Left = 440
-      Top = 8
+      Top = 24
       Width = 89
       Height = 21
       Caption = 'Send Messsage'
       TabOrder = 2
       OnClick = btnSendClick
     end
-    object btnGetAll: TButton
-      Left = 8
-      Top = 64
-      Width = 75
-      Height = 25
-      Caption = 'Get All'
-      TabOrder = 3
-      TabStop = False
-      OnClick = btnGetAllClick
-    end
-    object btnJsonToObj: TButton
-      Left = 628
-      Top = 64
-      Width = 75
-      Height = 25
-      Caption = 'JsonToObj'
-      TabOrder = 4
-      TabStop = False
-      OnClick = btnJsonToObjClick
-    end
     object btnJsonToMemo: TButton
-      Left = 535
-      Top = 64
+      Left = 344
+      Top = 72
       Width = 89
       Height = 25
       Caption = 'JsonToMemo'
-      TabOrder = 5
+      TabOrder = 10
       TabStop = False
       OnClick = btnJsonToMemoClick
     end
-    object btnEqual: TButton
-      Left = 88
-      Top = 64
+    object btnJsonToObj: TButton
+      Left = 438
+      Top = 72
       Width = 75
       Height = 25
-      Caption = 'EqualTo'
-      TabOrder = 6
+      Caption = 'JsonToObj'
+      TabOrder = 11
       TabStop = False
-      OnClick = btnEqualClick
+      OnClick = btnJsonToObjClick
     end
-    object btnStartsWith: TButton
-      Left = 168
-      Top = 64
-      Width = 75
-      Height = 25
-      Caption = 'StartsWith'
-      TabOrder = 7
-      TabStop = False
-      OnClick = btnStartsWithClick
-    end
-    object btnContains: TButton
-      Left = 248
-      Top = 64
-      Width = 89
-      Height = 25
-      Caption = 'Contains'
-      TabOrder = 8
-      TabStop = False
-      OnClick = btnContainsClick
-    end
-    object editEqual: TEdit
-      Left = 88
-      Top = 40
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 417
+    Width = 711
+    Height = 73
+    Align = alBottom
+    Caption = 'Users'
+    TabOrder = 2
+    ExplicitTop = 103
+    ExplicitWidth = 489
+    object edUsername: TEdit
+      Left = 8
+      Top = 16
       Width = 73
       Height = 21
-      TabStop = False
-      TabOrder = 9
-      TextHint = 'Usu'#225'rio...'
+      TabOrder = 0
+      TextHint = 'Username...'
     end
-    object editStarts: TEdit
-      Left = 168
-      Top = 40
+    object edPassword: TEdit
+      Left = 88
+      Top = 16
       Width = 75
       Height = 21
-      TabStop = False
-      TabOrder = 10
-      TextHint = 'Usu'#225'rio...'
+      TabOrder = 1
+      TextHint = 'Password...'
     end
-    object editContains: TEdit
-      Left = 248
-      Top = 40
+    object edEmail: TEdit
+      Left = 168
+      Top = 16
       Width = 89
       Height = 21
-      TabStop = False
-      TabOrder = 11
-      TextHint = 'Mensagem...'
+      TabOrder = 2
+      TextHint = 'E-mail....'
+    end
+    object btnInsertUser: TButton
+      Left = 264
+      Top = 16
+      Width = 67
+      Height = 25
+      Caption = 'Insert'
+      TabOrder = 3
+      OnClick = btnInsertUserClick
+    end
+    object btnLogin: TButton
+      Left = 336
+      Top = 16
+      Width = 67
+      Height = 25
+      Caption = 'Login'
+      TabOrder = 4
+      OnClick = btnLoginClick
+    end
+    object btnLogout: TButton
+      Left = 408
+      Top = 16
+      Width = 67
+      Height = 25
+      Caption = 'LogOut'
+      TabOrder = 5
+      OnClick = btnLogoutClick
+    end
+    object btnCurrentUser: TButton
+      Left = 8
+      Top = 40
+      Width = 73
+      Height = 25
+      Caption = 'CurrentUser'
+      TabOrder = 6
+      OnClick = btnCurrentUserClick
     end
   end
 end

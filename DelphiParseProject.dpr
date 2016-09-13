@@ -10,7 +10,8 @@ uses
   DelphiParse in 'source\DelphiParse.pas',
   Mensagem in 'model\Mensagem.pas',
   DelphiParse.Query in 'source\DelphiParse.Query.pas',
-  DelphiParse.Utils in 'source\DelphiParse.Utils.pas';
+  DelphiParse.Utils in 'source\DelphiParse.Utils.pas',
+  DelphiParse.User in 'source\DelphiParse.User.pas';
 
 {$R *.res}
 

@@ -3,27 +3,36 @@ unit ufrmMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils,
+  System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   DelphiParse.Interfaces, DelphiParse.Objects, Mensagem,
-  REST.Json, System.Json;
+  REST.Json, System.Json, DelphiParse.User;
 
 type
   TfrmMain = class(TForm)
     memResult: TMemo;
-    Panel1: TPanel;
-    editUser: TEdit;
-    editMessage: TEdit;
-    btnSend: TButton;
+    GroupBox2: TGroupBox;
     btnGetAll: TButton;
-    btnJsonToObj: TButton;
-    btnJsonToMemo: TButton;
     btnEqual: TButton;
     btnStartsWith: TButton;
     btnContains: TButton;
     editEqual: TEdit;
     editStarts: TEdit;
     editContains: TEdit;
+    editUser: TEdit;
+    editMessage: TEdit;
+    btnSend: TButton;
+    btnJsonToMemo: TButton;
+    btnJsonToObj: TButton;
+    GroupBox1: TGroupBox;
+    edUsername: TEdit;
+    edPassword: TEdit;
+    edEmail: TEdit;
+    btnInsertUser: TButton;
+    btnLogin: TButton;
+    btnLogout: TButton;
+    btnCurrentUser: TButton;
     procedure btnSendClick(Sender: TObject);
     procedure btnGetAllClick(Sender: TObject);
     procedure btnJsonToObjClick(Sender: TObject);
@@ -31,6 +40,10 @@ type
     procedure btnEqualClick(Sender: TObject);
     procedure btnContainsClick(Sender: TObject);
     procedure btnStartsWithClick(Sender: TObject);
+    procedure btnInsertUserClick(Sender: TObject);
+    procedure btnLoginClick(Sender: TObject);
+    procedure btnLogoutClick(Sender: TObject);
+    procedure btnCurrentUserClick(Sender: TObject);
   private
     procedure ObjetoToMemo(MensagemObj: TMensagem);
     procedure JsonToMemo(Value: TJsonValue);
@@ -93,6 +106,21 @@ begin
   memResult.Lines.Add(Resultado);
 end;
 
+procedure TfrmMain.btnInsertUserClick(Sender: TObject);
+var
+  User: IParseUser;
+  Resultado: string;
+begin
+  User := TParseUser.Create;
+  User.SetUserName(edUserName.Text);
+  User.SetPassword(edPassword.Text);
+  User.SetEmail(edEmail.Text);
+  Resultado := User.SignUpInBackground;
+  memResult.Lines.Clear;
+  memResult.Lines.Add(Resultado);
+  memResult.Lines.Add('Token: ' + User.GetSessionToken);
+end;
+
 procedure TfrmMain.btnSendClick(Sender: TObject);
 var
   Parse: IParseObject;
@@ -101,7 +129,7 @@ begin
   Parse := TParseObjects.Create('Mensagens');
   Parse.Add('username', editUser.Text);
   Parse.Add('mensagem', editMessage.Text);
-  Resultado := Parse.SaveInBackGround();
+  Resultado := Parse.SaveInBackGround;
   memResult.Lines.Clear;
   memResult.Lines.Add(Resultado);
 end;
@@ -116,6 +144,20 @@ begin
 
     Resultado := Parse.GetInBackGround;
     memResult.Lines.Clear;
+    memResult.Lines.Add(Resultado);
+end;
+
+procedure TfrmMain.btnCurrentUserClick(Sender: TObject);
+var
+  User: IParseUser;
+  Resultado: string;
+begin
+  User := TParseUser.Create;
+  Resultado := User.GetCurrencyUser;
+  memResult.Lines.Clear;
+  if Resultado.IsEmpty then
+    memResult.Lines.Add('Session not created!')
+  else
     memResult.Lines.Add(Resultado);
 end;
 
@@ -177,6 +219,30 @@ begin
   finally
     JsonStr.Free;
   end;
+end;
+
+procedure TfrmMain.btnLoginClick(Sender: TObject);
+var
+  User: IParseUser;
+  Resultado: string;
+begin
+  User := TParseUser.Create;
+  Resultado := User.Login(edUsername.Text, edPassword.Text);
+  memResult.Lines.Clear;
+  memResult.Lines.Add(Resultado);
+  memResult.Lines.Add('Token: ' + User.GetSessionToken);
+end;
+
+procedure TfrmMain.btnLogoutClick(Sender: TObject);
+var
+  User: IParseUser;
+  Resultado: string;
+begin
+  User := TParseUser.Create;
+  Resultado := User.LogOut;
+  memResult.Lines.Clear;
+  memResult.Lines.Add(Resultado);
+  memResult.Lines.Add('Token: ' + User.GetSessionToken);
 end;
 
 end.

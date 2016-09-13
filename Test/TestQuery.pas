@@ -8,7 +8,6 @@ type
   TTestQuery = class(TTestCase)
   private
     Query: TParseQuery;
-  public
     procedure SetUp; override;
     procedure TearDown; override;
   published

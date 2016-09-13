@@ -58,6 +58,10 @@ type
     function Delete(const UrlParams: array of string;
       ObjectJson: TJSONValue = nil;
       QueryParams: string = ''): IResponseParse;
+    procedure SetRevocableSession(Value: Boolean);
+
+    function GetSessionToken: string;
+    procedure SetSessionToken(Value: string);
   end;
 
   IParseQuery = interface
@@ -73,6 +77,7 @@ type
     //others
     procedure SetLimit(Value: Integer);
     procedure SetSkip(Value: Integer);
+    procedure Others(Key, Value: string);
 
     //formatted
     function GetParamsFormatted: string;
@@ -92,6 +97,24 @@ type
     function GetInBackGround: string;
     function GetAllInBackGround: string;
     function DeleteInBackGround(ObjectId: string): string;
+  end;
+
+  IParseUser = interface
+    ['{D75AD7B0-21BA-4749-B4EB-A94FB66DAC34}']
+
+    procedure SetUserName(Value: string);
+    procedure SetEmail(Value: string);
+    procedure SetPassword(Value: string);
+
+    function GetSessionToken: string;
+
+    //custom fields
+    procedure Add(Key, Value: Variant);
+
+    function Login(UserName, Password: string): string;
+    function LogOut: string;
+    function GetCurrencyUser: string;
+    function SignUpInBackground: string;
   end;
 
 implementation

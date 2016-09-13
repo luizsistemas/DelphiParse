@@ -44,14 +44,17 @@ type
     EqualToParams: TDictionary<string, string>;
     StartsWithParams: TDictionary<string, string>;
     ContainsParams: TDictionary<string, string>;
+    OthersParams: TDictionary<string, string>;
     FLimit: Integer;
     FSkip: Integer;
+    procedure ValidatesKey(Key: string; Params: TDictionary<string, string>);
     function FormatEqualTo: string;
     function FormatStartsWith: string;
     function FormatContains: string;
     function FormatLimit: string;
     function FormatWhereTerms: string;
     function FormatSkip: string;
+    function FormatOthers: string;
   public
     constructor Create;
     destructor Destroy; override;
@@ -66,6 +69,7 @@ type
     //others
     procedure SetLimit(Value: Integer);
     procedure SetSkip(Value: Integer);
+    procedure Others(Key, Value: string);
 
     //formatted
     function GetParamsFormatted: string;
@@ -90,6 +94,7 @@ begin
   EqualToParams := TDictionary<string, string>.Create;
   StartsWithParams := TDictionary<string,string>.Create;
   ContainsParams := TDictionary<string,string>.Create;
+  OthersParams := TDictionary<string,string>.Create;
 end;
 
 destructor TParseQuery.Destroy;
@@ -97,6 +102,7 @@ begin
   EqualToParams.Free;
   StartsWithParams.Free;
   ContainsParams.Free;
+  OthersParams.Free;
   inherited;
 end;
 
@@ -106,11 +112,10 @@ var
 begin
   if EqualToParams.Count = 0 then
     Exit;
-
   for Key in EqualToParams.Keys do
   begin
-    ValueDec := TURI.URLDecode(EqualToParams.Items[Key]);
     KeyDec := TURI.URLDecode(Key);
+    ValueDec := TURI.URLDecode(EqualToParams.Items[Key]);
     if Result <> '' then
       Result := Result + ',';
     Result := Result + Format('"%s":"%s"', [KeyDec, ValueDec]);
@@ -126,8 +131,8 @@ begin
 
   for Key in StartsWithParams.Keys do
   begin
-    ValueDec := StartsWithParams.Items[Key];
     KeyDec := TURI.URLDecode(Key);
+    ValueDec := TURI.URLDecode(StartsWithParams.Items[Key]);
     if Result <> '' then
       Result := Result + ',';
     Result := Result + Format('"%s":{"$regex":"^%s"}', [KeyDec, ValueDec]);
@@ -143,8 +148,8 @@ begin
 
   for Key in ContainsParams.Keys do
   begin
-    ValueDec := ContainsParams.Items[Key];
     KeyDec := TURI.URLDecode(Key);
+    ValueDec := TURI.URLDecode(ContainsParams.Items[Key]);
     if Result <> '' then
       Result := Result + ',';
     Result := Result + Format('"%s":{"$regex":"%s"}', [KeyDec, ValueDec]);
@@ -155,6 +160,22 @@ function TParseQuery.FormatLimit: string;
 begin
   if FLimit > 0 then
     Result := 'limit=' + FLimit.ToString;
+end;
+
+function TParseQuery.FormatOthers: string;
+var
+  Key, KeyDec, ValueDec: string;
+begin
+  if OthersParams.Count = 0 then
+    Exit;
+  for Key in OthersParams.Keys do
+  begin
+    KeyDec := TURI.URLDecode(Key);
+    ValueDec := TURI.URLDecode(OthersParams.Items[Key]);
+    if Result <> '' then
+      Result := Result + ',';
+    Result := Result + Format('"%s":"%s"', [KeyDec, ValueDec]);
+  end;
 end;
 
 function TParseQuery.FormatSkip: string;
@@ -184,7 +205,20 @@ begin
   Terms[0] := FormatWhereTerms;
   Terms[1] := FormatLimit;
   Terms[2] := FormatSkip;
+  Terms[3] := FormatOthers;
   Result := GetElementsNotEmpty('&', Terms);
+end;
+
+procedure TParseQuery.Others(Key, Value: string);
+begin
+  ValidatesKey(Key, OthersParams);
+  OthersParams.Add(Key, Value);
+end;
+
+procedure TParseQuery.ValidatesKey(Key: string; Params: TDictionary<string, string>);
+begin
+  if Params.ContainsKey(Key) then
+    raise ExceptionParseKeyDuplicate.Create('Key already exists with that name');
 end;
 
 procedure TParseQuery.SetLimit(Value: Integer);
@@ -199,22 +233,19 @@ end;
 
 procedure TParseQuery.WhereContains(Key, Value: string);
 begin
-  if ContainsParams.ContainsKey(Key) then
-    raise ExceptionParseKeyDuplicate.Create('Já existe Key com este nome');
+  ValidatesKey(Key, ContainsParams);
   ContainsParams.Add(Key, Value);
 end;
 
 procedure TParseQuery.WhereEqualTo(Key, Value: string);
 begin
-  if EqualToParams.ContainsKey(Key) then
-    raise ExceptionParseKeyDuplicate.Create('Já existe Key com este nome');
+  ValidatesKey(Key, EqualToParams);
   EqualToParams.Add(Key, Value);
 end;
 
 procedure TParseQuery.WhereStartsWith(Key, Value: string);
 begin
-  if StartsWithParams.ContainsKey(Key) then
-    raise ExceptionParseKeyDuplicate.Create('Já existe Key com este nome');
+  ValidatesKey(Key, StartsWithParams);
   StartsWithParams.Add(Key, Value);
 end;
 

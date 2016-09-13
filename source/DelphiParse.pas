@@ -50,12 +50,17 @@ type
 
   TDelphiParse = class(TInterfacedObject, IDelphiParse)
   private
+    FRevocableSession: Boolean;
+    class var SessionToken: string;
+
     function Send(const UrlParams: array of string;
       const Command: TParseVerbs; ObjectJson: TJSONValue = nil;
       QueryParams: string = ''): IResponseParse;
 
     function FormatUrlParams(Params: array of string): string;
   public
+    constructor Create;
+
     function Post(const UrlParams: array of string;
       ObjectJson: TJSONValue = nil;
       QueryParams: string = ''): IResponseParse;
@@ -71,6 +76,11 @@ type
     function Delete(const UrlParams: array of string;
       ObjectJson: TJSONValue = nil;
       QueryParams: string = ''): IResponseParse;
+
+    procedure SetRevocableSession(Value: Boolean);
+
+    function GetSessionToken: string;
+    procedure SetSessionToken(Value: string);
   end;
 
 implementation
@@ -79,6 +89,12 @@ uses
   System.Net.URLClient, System.Classes;
 
 { TDelphiParse }
+
+constructor TDelphiParse.Create;
+begin
+  inherited;
+  FRevocableSession := False;
+end;
 
 function TDelphiParse.Delete(const UrlParams: array of string;
   ObjectJson: TJSONValue; QueryParams: string): IResponseParse;
@@ -90,6 +106,11 @@ function TDelphiParse.Get(const UrlParams: array of string;
   ObjectJson: TJSONValue; QueryParams: string): IResponseParse;
 begin
   Result := Send(UrlParams, TParseVerbs.pvGet, nil, QueryParams);
+end;
+
+function TDelphiParse.GetSessionToken: string;
+begin
+  Result := SessionToken;
 end;
 
 function TDelphiParse.Post(const UrlParams: array of string;
@@ -117,32 +138,35 @@ function TDelphiParse.Send(const UrlParams: array of string;
   const Command: TParseVerbs; ObjectJson: TJSONValue;
   QueryParams: string): IResponseParse;
 var
-  HttpCliente: THTTPClient;
+  HttpClient: THTTPClient;
   HttpResponse: IHTTPResponse;
   CompletURL: string;
   ObjectStream: TStringStream;
 begin
-  HttpCliente := THTTPClient.Create;
+  HttpClient := THTTPClient.Create;
   try
-    HttpCliente.ContentType := 'application/json';
-    HttpCliente.CustomHeaders['X-Parse-Application-Id'] := APP_ID;
-    HttpCliente.CustomHeaders['X-Parse-REST-API-Key'] := REST_KEY;
+    HttpClient.ContentType := 'application/json';
+    HttpClient.CustomHeaders['X-Parse-Application-Id'] := APP_ID;
+    HttpClient.CustomHeaders['X-Parse-REST-API-Key'] := REST_KEY;
+    if FRevocableSession then
+      HttpClient.CustomHeaders['X-Parse-Revocable-Session'] := '1';
+    if not SessionToken.IsEmpty then
+      HttpClient.CustomHeaders['X-Parse-Session-Token'] := SessionToken;
     ObjectStream := nil;
     if ObjectJson <> nil then
       ObjectStream := TStringStream.Create(ObjectJson.ToJSON);
     try
       CompletURL := BASE_URL + FormatUrlParams(UrlParams) +
         IfThen(QueryParams='','', '?' + QueryParams);
-
       case Command of
         pvPost:
-          HttpResponse := HttpCliente.Post(CompletURL, ObjectStream);
+          HttpResponse := HttpClient.Post(CompletURL, ObjectStream);
         pvGet:
-          HttpResponse := HttpCliente.Get(CompletURL);
+          HttpResponse := HttpClient.Get(CompletURL);
         pvPut:
-          HttpResponse := HttpCliente.Put(CompletURL);
+          HttpResponse := HttpClient.Put(CompletURL, ObjectStream);
         pvDelete:
-          HttpResponse := HttpCliente.Delete(CompletURL);
+          HttpResponse := HttpClient.Delete(CompletURL);
       end;
       Result := TResponseParse.Create(HttpResponse);
     finally
@@ -150,8 +174,18 @@ begin
         ObjectStream.Free;
     end;
   finally
-    HttpCliente.Free;
+    HttpClient.Free;
   end;
+end;
+
+procedure TDelphiParse.SetRevocableSession(Value: Boolean);
+begin
+  FRevocableSession := Value;
+end;
+
+procedure TDelphiParse.SetSessionToken(Value: string);
+begin
+  SessionToken := Value;
 end;
 
 { TResponseParse }

@@ -19,7 +19,12 @@ uses
   TestQuery in 'TestQuery.pas',
   DelphiParse.Query in '..\source\DelphiParse.Query.pas',
   DelphiParse.Utils in '..\source\DelphiParse.Utils.pas',
-  DelphiParse.Interfaces in '..\source\DelphiParse.Interfaces.pas';
+  DelphiParse.Interfaces in '..\source\DelphiParse.Interfaces.pas',
+  TestParseUser in 'TestParseUser.pas',
+  DelphiParse.User in '..\source\DelphiParse.User.pas',
+  DelphiParse in '..\source\DelphiParse.pas',
+  DelphiParse.Objects in '..\source\DelphiParse.Objects.pas',
+  DelphiParse.Configuration in '..\source\DelphiParse.Configuration.pas';
 
 {$R *.RES}
 
