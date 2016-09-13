@@ -33,6 +33,7 @@ type
     btnLogin: TButton;
     btnLogout: TButton;
     btnCurrentUser: TButton;
+    btnDelete: TButton;
     procedure btnSendClick(Sender: TObject);
     procedure btnGetAllClick(Sender: TObject);
     procedure btnJsonToObjClick(Sender: TObject);
@@ -44,6 +45,7 @@ type
     procedure btnLoginClick(Sender: TObject);
     procedure btnLogoutClick(Sender: TObject);
     procedure btnCurrentUserClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
   private
     procedure ObjetoToMemo(MensagemObj: TMensagem);
     procedure JsonToMemo(Value: TJsonValue);
@@ -159,6 +161,24 @@ begin
     memResult.Lines.Add('Session not created!')
   else
     memResult.Lines.Add(Resultado);
+end;
+
+procedure TfrmMain.btnDeleteClick(Sender: TObject);
+var
+  Parse: IParseObject;
+  ObjectId: string;
+  Response: string;
+begin
+  ObjectId := inputBox('Delete Message', 'Id:', '');
+  if Trim(ObjectId) = EmptyStr then
+    Exit;
+  Parse := TParseObjects.Create('Mensagens');
+  Response := Parse.DeleteInBackGround(ObjectId);
+  memResult.Lines.Clear;
+  if Trim(Response) = '{}' then
+    memResult.Lines.Add('Register deleted.')
+  else
+    memResult.Lines.Add(Response);
 end;
 
 procedure TfrmMain.btnEqualClick(Sender: TObject);

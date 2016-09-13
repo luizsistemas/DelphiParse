@@ -7,18 +7,18 @@
     <Transaction>2016/02/25 10:46:09.000.130,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2016/08/15 07:46:23.000.329,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2016/09/08 07:22:39.000.003,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2016/09/08 07:23:10.000.000,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\views\ufrmMain.dfm</Transaction>
-    <Transaction>2016/09/08 07:23:10.000.000,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Unit1.pas=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\views\ufrmMain.pas</Transaction>
-    <Transaction>2016/09/08 07:23:17.000.684,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Project1.dproj=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\DelphiParseProject.dproj</Transaction>
+    <Transaction>2016/09/08 07:23:10.000.000,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\views\ufrmMain.dfm=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2016/09/08 07:23:10.000.000,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\views\ufrmMain.pas=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/09/08 07:23:17.000.684,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\DelphiParseProject.dproj=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2016/09/08 07:42:23.000.272,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\source\DelphiParse.Consts.pas</Transaction>
     <Transaction>2016/09/08 07:42:23.000.636,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\source\DelphiParse.pas</Transaction>
     <Transaction>2016/09/08 07:42:23.000.281,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\source\DelphiParse.Interfaces.pas</Transaction>
     <Transaction>2016/09/08 07:42:23.000.626,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\source\DelphiParse.Objects.pas</Transaction>
     <Transaction>2016/09/08 08:14:41.000.374,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\model\Mensagem.pas</Transaction>
     <Transaction>2016/09/08 10:18:57.000.783,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Unit1.pas</Transaction>
-    <Transaction>2016/09/08 10:19:16.000.525,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\source\DelphiParse.Query.pas=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Unit1.pas</Transaction>
+    <Transaction>2016/09/08 10:19:16.000.525,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Unit1.pas=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\source\DelphiParse.Query.pas</Transaction>
     <Transaction>2016/09/09 08:58:55.000.940,=F:\Delphi10\Projetos\Parse\source\DelphiParse.Utils.pas</Transaction>
-    <Transaction>2016/09/09 14:35:04.000.976,F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.Consts.pas=F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.Configuration.pas</Transaction>
-    <Transaction>2016/09/12 17:58:56.032,=F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.User.pas</Transaction>
+    <Transaction>2016/09/09 14:35:04.000.976,F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.Configuration.pas=F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.Consts.pas</Transaction>
+    <Transaction>2016/09/12 17:58:56.000.032,=F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.User.pas</Transaction>
   </Transactions>
 </BorlandProject>

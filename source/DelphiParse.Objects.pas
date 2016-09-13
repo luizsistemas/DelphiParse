@@ -41,13 +41,11 @@ type
   TParseObjects = class(TInterfacedObject, IParseObject)
   private
     FClassName: string;
-    FSessionToken: string;
-
     Obj: TJSonObject;
     Parse: IDelphiParse;
     Query: IParseQuery;
   public
-    constructor Create(ClassName: string; SessionToken: string = '');
+    constructor Create(ClassName: string);
     destructor Destroy; override;
 
     procedure WhereEqualTo(Key, Value: string);
@@ -71,11 +69,10 @@ uses
 
 { TDelphiParseObjects }
 
-constructor TParseObjects.Create(ClassName, SessionToken: string);
+constructor TParseObjects.Create(ClassName: string);
 begin
   inherited Create;
   FClassName := ClassName;
-  FSessionToken := SessionToken;
   Obj := TJSONObject.Create;
   Parse := TDelphiParse.Create;
   Query := TParseQuery.Create;
