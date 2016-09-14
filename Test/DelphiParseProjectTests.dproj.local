@@ -2,18 +2,18 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2016/09/08 10:23:20.000.344,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Test\Unit1.pas</Transaction>
-    <Transaction>2016/09/08 10:23:34.000.643,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Test\TestQuery.pas=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Test\Unit1.pas</Transaction>
+    <Transaction>2016/09/08 10:23:34.000.643,F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Test\Unit1.pas=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\Test\TestQuery.pas</Transaction>
     <Transaction>2016/09/08 10:25:47.000.193,=F:\Usuario\LuizCarlos\Documentos\Embarcadero\Studio\Projects\Parse\source\DelphiParse.Query.pas</Transaction>
     <Transaction>2016/09/08 18:11:04.000.614,=F:\Delphi10\Projetos\Parse\Test\Unit1.pas</Transaction>
-    <Transaction>2016/09/08 18:11:19.000.885,F:\Delphi10\Projetos\Parse\Test\Unit1.pas=F:\Delphi10\Projetos\Parse\source\DelphiParse.Utils.pas</Transaction>
+    <Transaction>2016/09/08 18:11:19.000.885,F:\Delphi10\Projetos\Parse\source\DelphiParse.Utils.pas=F:\Delphi10\Projetos\Parse\Test\Unit1.pas</Transaction>
     <Transaction>2016/09/09 13:59:33.000.447,=F:\Delphi10\Projetos\Parse\source\DelphiParse.Interfaces.pas</Transaction>
     <Transaction>2016/09/12 14:15:15.000.787,=F:\Delphi10\Projetos\DelphiParse\Test\Unit1.pas</Transaction>
-    <Transaction>2016/09/12 14:15:27.000.093,F:\Delphi10\Projetos\DelphiParse\Test\Unit1.pas=F:\Delphi10\Projetos\DelphiParse\Test\TestParseUser.pas</Transaction>
+    <Transaction>2016/09/12 14:15:27.000.093,F:\Delphi10\Projetos\DelphiParse\Test\TestParseUser.pas=F:\Delphi10\Projetos\DelphiParse\Test\Unit1.pas</Transaction>
     <Transaction>2016/09/12 14:19:27.000.022,=F:\Delphi10\Projetos\DelphiParse\Test\Unit1.pas</Transaction>
-    <Transaction>2016/09/12 14:19:50.000.904,F:\Delphi10\Projetos\DelphiParse\Test\Unit1.pas=F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.pas</Transaction>
+    <Transaction>2016/09/12 14:19:50.000.904,F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.pas=F:\Delphi10\Projetos\DelphiParse\Test\Unit1.pas</Transaction>
     <Transaction>2016/09/12 14:38:00.000.682,F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.User=</Transaction>
     <Transaction>2016/09/12 14:38:14.000.723,=F:\Delphi10\Projetos\DelphiParse\Test\Unit1.pas</Transaction>
-    <Transaction>2016/09/12 14:38:52.000.465,F:\Delphi10\Projetos\DelphiParse\Test\Unit1.pas=F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.pas</Transaction>
+    <Transaction>2016/09/12 14:38:52.000.465,F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.pas=F:\Delphi10\Projetos\DelphiParse\Test\Unit1.pas</Transaction>
     <Transaction>2016/09/12 14:39:53.000.503,=F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.User.pas</Transaction>
     <Transaction>2016/09/12 14:42:31.000.274,=F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.pas</Transaction>
     <Transaction>2016/09/12 14:43:12.000.493,=F:\Delphi10\Projetos\DelphiParse\source\DelphiParse.Objects.pas</Transaction>

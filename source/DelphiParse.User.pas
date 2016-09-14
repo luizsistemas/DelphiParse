@@ -68,7 +68,6 @@ type
 
     procedure Add(Key, Value: Variant);
 
-
     function Login(UserName, Password: string): string;
     function LogOut: string;
     function GetCurrencyUser: string;

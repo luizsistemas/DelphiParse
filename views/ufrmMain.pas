@@ -34,6 +34,7 @@ type
     btnLogout: TButton;
     btnCurrentUser: TButton;
     btnDelete: TButton;
+    btnUpdate: TButton;
     procedure btnSendClick(Sender: TObject);
     procedure btnGetAllClick(Sender: TObject);
     procedure btnJsonToObjClick(Sender: TObject);
@@ -173,12 +174,11 @@ begin
   if Trim(ObjectId) = EmptyStr then
     Exit;
   Parse := TParseObjects.Create('Mensagens');
-  Response := Parse.DeleteInBackGround(ObjectId);
+  Parse.Add('objectId', ObjectId);
+  Parse.Add('mensagem', 'nova mensagem...');
+  Response := Parse.SaveInBackGround;
   memResult.Lines.Clear;
-  if Trim(Response) = '{}' then
-    memResult.Lines.Add('Register deleted.')
-  else
-    memResult.Lines.Add(Response);
+  memResult.Lines.Add(Response);
 end;
 
 procedure TfrmMain.btnEqualClick(Sender: TObject);

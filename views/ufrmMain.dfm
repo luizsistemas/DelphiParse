@@ -22,7 +22,6 @@ object frmMain: TfrmMain
     Align = alClient
     ScrollBars = ssVertical
     TabOrder = 0
-    ExplicitHeight = 328
   end
   object GroupBox2: TGroupBox
     Left = 0
@@ -32,14 +31,13 @@ object frmMain: TfrmMain
     Align = alBottom
     Caption = 'Messages'
     TabOrder = 1
-    ExplicitTop = 338
     object btnGetAll: TButton
       Left = 264
       Top = 71
       Width = 75
       Height = 25
       Caption = 'Get All'
-      TabOrder = 9
+      TabOrder = 11
       TabStop = False
       OnClick = btnGetAllClick
     end
@@ -49,7 +47,7 @@ object frmMain: TfrmMain
       Width = 75
       Height = 25
       Caption = 'EqualTo'
-      TabOrder = 6
+      TabOrder = 8
       TabStop = False
       OnClick = btnEqualClick
     end
@@ -59,7 +57,7 @@ object frmMain: TfrmMain
       Width = 75
       Height = 25
       Caption = 'StartsWith'
-      TabOrder = 7
+      TabOrder = 9
       TabStop = False
       OnClick = btnStartsWithClick
     end
@@ -69,7 +67,7 @@ object frmMain: TfrmMain
       Width = 89
       Height = 25
       Caption = 'Contains'
-      TabOrder = 8
+      TabOrder = 10
       TabStop = False
       OnClick = btnContainsClick
     end
@@ -79,7 +77,7 @@ object frmMain: TfrmMain
       Width = 73
       Height = 21
       TabStop = False
-      TabOrder = 3
+      TabOrder = 5
       TextHint = 'Usu'#225'rio...'
     end
     object editStarts: TEdit
@@ -88,7 +86,7 @@ object frmMain: TfrmMain
       Width = 75
       Height = 21
       TabStop = False
-      TabOrder = 4
+      TabOrder = 6
       TextHint = 'Usu'#225'rio...'
     end
     object editContains: TEdit
@@ -97,7 +95,7 @@ object frmMain: TfrmMain
       Width = 89
       Height = 21
       TabStop = False
-      TabOrder = 5
+      TabOrder = 7
       TextHint = 'Mensagem...'
     end
     object editUser: TEdit
@@ -111,13 +109,13 @@ object frmMain: TfrmMain
     object editMessage: TEdit
       Left = 136
       Top = 20
-      Width = 297
+      Width = 281
       Height = 21
       TabOrder = 1
       TextHint = 'Mensagem...'
     end
     object btnSend: TButton
-      Left = 440
+      Left = 421
       Top = 20
       Width = 89
       Height = 21
@@ -131,7 +129,7 @@ object frmMain: TfrmMain
       Width = 89
       Height = 25
       Caption = 'JsonToMemo'
-      TabOrder = 10
+      TabOrder = 12
       TabStop = False
       OnClick = btnJsonToMemoClick
     end
@@ -141,17 +139,26 @@ object frmMain: TfrmMain
       Width = 75
       Height = 25
       Caption = 'JsonToObj'
-      TabOrder = 11
+      TabOrder = 13
       TabStop = False
       OnClick = btnJsonToObjClick
     end
     object btnDelete: TButton
-      Left = 536
+      Left = 607
       Top = 20
       Width = 89
       Height = 21
       Caption = 'Delete Message'
-      TabOrder = 12
+      TabOrder = 4
+      OnClick = btnDeleteClick
+    end
+    object btnUpdate: TButton
+      Left = 514
+      Top = 20
+      Width = 89
+      Height = 21
+      Caption = 'Update Message'
+      TabOrder = 3
       OnClick = btnDeleteClick
     end
   end
@@ -167,7 +174,7 @@ object frmMain: TfrmMain
       Left = 8
       Top = 16
       Width = 73
-      Height = 25
+      Height = 21
       TabOrder = 0
       TextHint = 'Username...'
     end
@@ -175,7 +182,7 @@ object frmMain: TfrmMain
       Left = 88
       Top = 16
       Width = 75
-      Height = 25
+      Height = 21
       TabOrder = 1
       TextHint = 'Password...'
     end
@@ -183,7 +190,7 @@ object frmMain: TfrmMain
       Left = 168
       Top = 16
       Width = 89
-      Height = 25
+      Height = 21
       TabOrder = 2
       TextHint = 'E-mail....'
     end

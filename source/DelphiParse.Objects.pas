@@ -103,7 +103,10 @@ function TParseObjects.SaveInBackGround: string;
 begin
   if (Obj.Count = 0) then
     raise Exception.Create('Objeto JSON não preenchido!');
-  Result := Parse.Post(['classes', FClassName], Obj).ResponseAsString();
+  if Assigned(Obj.GetValue('objectId')) then
+    Result := Parse.Put(['classes', FClassName, Obj.GetValue<string>('objectId')], Obj).ResponseAsString()
+  else
+    Result := Parse.Post(['classes', FClassName], Obj).ResponseAsString();
 end;
 
 procedure TParseObjects.WhereContains(Key, Value: string);
