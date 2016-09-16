@@ -78,6 +78,7 @@ type
     procedure SetLimit(Value: Integer);
     procedure SetSkip(Value: Integer);
     procedure Others(Key, Value: string);
+    procedure AddRestrictFields(Field: string);
 
     //order
     procedure AscendingOrder(Field: string);
@@ -94,6 +95,7 @@ type
     procedure WhereContains(Key, Value: string);
     procedure Limit(Value: Integer);
     procedure Skip(Value: Integer);
+    procedure AddRestrictFields(Field: string);
     procedure AddOrderAsc(Field: string);
     procedure AddOrderDesc(Field: string);
 

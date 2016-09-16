@@ -45,6 +45,7 @@ type
     StartsWithParams: TDictionary<string, string>;
     ContainsParams: TDictionary<string, string>;
     OthersParams: TDictionary<string, string>;
+    Keys: TList<string>;
     Order: TList<string>;
     FLimit: Integer;
     FSkip: Integer;
@@ -57,6 +58,7 @@ type
     function FormatSkip: string;
     function FormatOthers: string;
     function FormatOrders: string;
+    function FormatKeys: string;
   public
     constructor Create;
     destructor Destroy; override;
@@ -72,6 +74,7 @@ type
     procedure SetLimit(Value: Integer);
     procedure SetSkip(Value: Integer);
     procedure Others(Key, Value: string);
+    procedure AddRestrictFields(Field: string);
 
     //order
     procedure AscendingOrder(Field: string);
@@ -101,7 +104,13 @@ begin
   StartsWithParams := TDictionary<string,string>.Create;
   ContainsParams := TDictionary<string,string>.Create;
   OthersParams := TDictionary<string,string>.Create;
+  Keys := TList<string>.Create;
   Order := TList<string>.Create;
+end;
+
+procedure TParseQuery.AddRestrictFields(Field: string);
+begin
+  Keys.Add(Field);
 end;
 
 procedure TParseQuery.AscendingOrder(Field: string);
@@ -120,6 +129,7 @@ begin
   StartsWithParams.Free;
   ContainsParams.Free;
   OthersParams.Free;
+  Keys.Free;
   Order.Free;
   inherited;
 end;
@@ -202,6 +212,13 @@ begin
     Result := 'skip=' + FSkip.ToString;
 end;
 
+function TParseQuery.FormatKeys: string;
+begin
+  if Keys.Count = 0 then
+    Exit;
+  Result := 'keys=' + String.Join(',', Keys.ToArray);
+end;
+
 function TParseQuery.FormatOrders: string;
 begin
   if Order.Count = 0 then
@@ -225,13 +242,14 @@ end;
 
 function TParseQuery.GetParamsFormatted: string;
 var
-  Terms: Array[0..4] of string;
+  Terms: Array[0..5] of string;
 begin
   Terms[0] := FormatWhereTerms;
   Terms[1] := FormatLimit;
   Terms[2] := FormatSkip;
   Terms[3] := FormatOthers;
   Terms[4] := FormatOrders;
+  Terms[5] := FormatKeys;
   Result := GetElementsNotEmpty('&', Terms);
 end;
 

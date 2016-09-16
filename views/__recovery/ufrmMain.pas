@@ -47,8 +47,6 @@ type
     Button1: TButton;
     memoOrderDesc: TMemo;
     Label2: TLabel;
-    btnAddKey: TButton;
-    edKey: TEdit;
     memoKeys: TMemo;
     Label3: TLabel;
     procedure btnSendClick(Sender: TObject);

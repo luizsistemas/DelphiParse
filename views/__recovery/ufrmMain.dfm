@@ -162,7 +162,7 @@ object frmMain: TfrmMain
       ImageIndex = 1
       ExplicitWidth = 481
       object Label3: TLabel
-        Left = 472
+        Left = 280
         Top = 0
         Width = 23
         Height = 13
@@ -170,7 +170,7 @@ object frmMain: TfrmMain
       end
       object btnGetAll: TButton
         Left = 280
-        Top = 68
+        Top = 76
         Width = 185
         Height = 25
         Caption = 'Get All'
@@ -255,30 +255,12 @@ object frmMain: TfrmMain
         TabStop = False
         OnClick = btnJsonToObjClick
       end
-      object btnAddKey: TButton
-        Left = 280
-        Top = 37
-        Width = 185
-        Height = 25
-        Caption = 'Keys'
-        TabOrder = 9
-        TabStop = False
-      end
-      object edKey: TEdit
-        Left = 280
-        Top = 14
-        Width = 185
-        Height = 21
-        TabStop = False
-        TabOrder = 10
-        TextHint = 'Key...'
-      end
       object memoKeys: TMemo
-        Left = 472
+        Left = 280
         Top = 16
         Width = 185
         Height = 57
-        TabOrder = 11
+        TabOrder = 9
       end
     end
     object TabSheet3: TTabSheet

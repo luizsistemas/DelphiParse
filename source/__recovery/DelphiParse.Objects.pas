@@ -6,23 +6,23 @@
 { Colaboradores nesse arquivo:                                                 }
 {    Luiz Carlos Alves - contato@luizsistemas.com.br                           }
 {                                                                              }
-{ VocÍ pode obter a ˙ltima vers„o desse arquivo no repositÛrio                 }
+{ Voc√™ pode obter a √∫ltima vers√£o desse arquivo no reposit√≥rio                 }
 { https://github.com/luizsistemas/DelphiParse                                  }
 {                                                                              }
-{  Esta biblioteca È software livre; vocÍ pode redistribuÌ-la e/ou modific·-la }
-{ sob os termos da LicenÁa P˙blica Geral Menor do GNU conforme publicada pela  }
-{ Free Software Foundation; tanto a vers„o 2.1 da LicenÁa, ou (a seu critÈrio) }
-{ qualquer vers„o posterior.                                                   }
+{  Esta biblioteca √© software livre; voc√™ pode redistribu√≠-la e/ou modific√°-la }
+{ sob os termos da Licen√ßa P√∫blica Geral Menor do GNU conforme publicada pela  }
+{ Free Software Foundation; tanto a vers√£o 2.1 da Licen√ßa, ou (a seu crit√©rio) }
+{ qualquer vers√£o posterior.                                                   }
 {                                                                              }
-{ Esta biblioteca È distribuÌda na expectativa de que seja ˙til, porÈm, SEM   }
-{ NENHUMA GARANTIA; nem mesmo a garantia implÌcita de COMERCIABILIDADE OU      }
-{ ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a LicenÁa P˙blica Geral Menor}
-{ do GNU para mais detalhes. (Arquivo LICEN«A.TXT ou LICENSE.TXT)              }
+{ Esta biblioteca √© distribu√≠da na expectativa de que seja √∫til, por√©m, SEM   }
+{ NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de COMERCIABILIDADE OU      }
+{ ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a Licen√ßa P√∫blica Geral Menor}
+{ do GNU para mais detalhes. (Arquivo LICEN√áA.TXT ou LICENSE.TXT)              }
 {                                                                              }
-{ VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Geral Menor do GNU junto}
-{ com esta biblioteca; se n„o, escreva para a Free Software Foundation, Inc.,  }
-{ no endereÁo 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.          }
-{ VocÍ tambÈm pode obter uma copia da licenÁa em:                              }
+{ Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Geral Menor do GNU junto}
+{ com esta biblioteca; se n√£o, escreva para a Free Software Foundation, Inc.,  }
+{ no endere√ßo 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.          }
+{ Voc√™ tamb√©m pode obter uma copia da licen√ßa em:                              }
 { http://www.opensource.org/licenses/lgpl-license.php                          }
 {                                                                              }
 { Luiz Carlos Alves - contato@luizsistemas.com.br -  www.luizsistemas.com.br   }
@@ -83,7 +83,7 @@ end;
 
 procedure TParseObjects.AddRestrictFields(Field: string);
 begin
-  Query.
+  Query.AddRestrictFields(Field);
 end;
 
 constructor TParseObjects.Create(ClassName: string);
@@ -114,7 +114,7 @@ end;
 function TParseObjects.SaveInBackGround: string;
 begin
   if (Obj.Count = 0) then
-    raise Exception.Create('Objeto JSON n„o preenchido!');
+    raise Exception.Create('Objeto JSON n√£o preenchido!');
   if Assigned(Obj.GetValue('objectId')) then
     Result := Parse.Put(['classes', FClassName, Obj.GetValue<string>('objectId')], Obj).ResponseAsString()
   else
@@ -149,7 +149,7 @@ end;
 function TParseObjects.DeleteInBackGround(ObjectId: string): string;
 begin
   if (ObjectId = '') then
-    raise Exception.Create('ObjectId n„o informado!');
+    raise Exception.Create('ObjectId n√£o informado!');
   Result := Parse.Delete(['classes', FClassName, ObjectId]).ResponseAsString();
 end;
 
