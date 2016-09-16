@@ -7,24 +7,11 @@ uses
   System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   DelphiParse.Interfaces, DelphiParse.Objects, Mensagem,
-  REST.Json, System.Json, DelphiParse.User;
+  REST.Json, System.Json, DelphiParse.User, Vcl.ComCtrls;
 
 type
   TfrmMain = class(TForm)
     memResult: TMemo;
-    GroupBox2: TGroupBox;
-    btnGetAll: TButton;
-    btnEqual: TButton;
-    btnStartsWith: TButton;
-    btnContains: TButton;
-    editEqual: TEdit;
-    editStarts: TEdit;
-    editContains: TEdit;
-    editUser: TEdit;
-    editMessage: TEdit;
-    btnSend: TButton;
-    btnJsonToMemo: TButton;
-    btnJsonToObj: TButton;
     GroupBox1: TGroupBox;
     edUsername: TEdit;
     edPassword: TEdit;
@@ -33,8 +20,33 @@ type
     btnLogin: TButton;
     btnLogout: TButton;
     btnCurrentUser: TButton;
-    btnDelete: TButton;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    editUser: TEdit;
+    editMessage: TEdit;
+    btnSend: TButton;
+    TabSheet2: TTabSheet;
+    btnGetAll: TButton;
+    btnEqual: TButton;
+    btnStartsWith: TButton;
+    btnContains: TButton;
+    editEqual: TEdit;
+    editStarts: TEdit;
+    editContains: TEdit;
+    btnJsonToMemo: TButton;
+    btnJsonToObj: TButton;
+    TabSheet3: TTabSheet;
     btnUpdate: TButton;
+    btnDelete: TButton;
+    edOrderBy: TEdit;
+    btnOrderAsc: TButton;
+    btnOrderDesc: TButton;
+    Button3: TButton;
+    memoOrderAsc: TMemo;
+    Label1: TLabel;
+    Button1: TButton;
+    memoOrderDesc: TMemo;
+    Label2: TLabel;
     procedure btnSendClick(Sender: TObject);
     procedure btnGetAllClick(Sender: TObject);
     procedure btnJsonToObjClick(Sender: TObject);
@@ -47,9 +59,15 @@ type
     procedure btnLogoutClick(Sender: TObject);
     procedure btnCurrentUserClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure btnOrderAscClick(Sender: TObject);
+    procedure btnOrderDescClick(Sender: TObject);
   private
     procedure ObjetoToMemo(MensagemObj: TMensagem);
     procedure JsonToMemo(Value: TJsonValue);
+    procedure SimpleList(Value: TJsonValue);
+    function FormatStringLength(Value: string; Size: Integer): string;
   public
   end;
 
@@ -85,6 +103,32 @@ begin
   memResult.Lines.Add('================================');
 end;
 
+function tfrmMain.FormatStringLength(Value: string; Size: Integer): string;
+begin
+  Result := Value + StringOfChar(' ', Size - Length(Value));
+end;
+
+procedure TfrmMain.SimpleList(Value: TJsonValue);
+begin
+  if memResult.Lines.Count = 0 then
+  begin
+    memResult.Lines.Add(
+      FormatStringLength('Objectid', 12) +
+      FormatStringLength('Username', 10) +
+      FormatStringLength('createdAt', 26) +
+      FormatStringLength('updatedAt', 26) +
+      FormatStringLength('Mensagem', 25));
+
+    memResult.Lines.Add(stringofChar('=',100));
+  end;
+  memResult.Lines.Add(
+    FormatStringLength(Value.GetValue<string>('objectId'), 12) +
+    FormatStringLength(Value.GetValue<string>('username'), 10) +
+    FormatStringLength(Value.GetValue<string>('createdAt'), 26) +
+    FormatStringLength(Value.GetValue<string>('updatedAt'), 26) +
+    FormatStringLength(Value.GetValue<string>('mensagem'), 25));
+end;
+
 procedure TfrmMain.btnContainsClick(Sender: TObject);
 var
   Parse: IParseObject;
@@ -104,7 +148,7 @@ var
   Resultado: string;
 begin
   Parse := TParseObjects.Create('Mensagens');
-  Resultado := Parse.GetAllInBackGround();
+  Resultado := Parse.GetInBackGround();
   memResult.Lines.Clear;
   memResult.Lines.Add(Resultado);
 end;
@@ -148,6 +192,38 @@ begin
     Resultado := Parse.GetInBackGround;
     memResult.Lines.Clear;
     memResult.Lines.Add(Resultado);
+end;
+
+procedure TfrmMain.Button1Click(Sender: TObject);
+begin
+  memoOrderAsc.Clear;
+  memoOrderDesc.Clear;
+end;
+
+procedure TfrmMain.Button3Click(Sender: TObject);
+var
+  Parse: IParseObject;
+  Response: string;
+  JsonStr: TJSONObject;
+  JsonArray: TJSONArray;
+  MensagemJson: TJSONValue;
+  Field: string;
+begin
+  Parse := TParseObjects.Create('Mensagens');
+  for Field in memoOrderAsc.Lines do
+     Parse.AddOrderAsc(Field);
+  for Field in memoOrderDesc.Lines do
+     Parse.AddOrderDesc(Field);
+  Response := Parse.GetInBackGround();
+  JsonStr := TJSONObject.ParseJSONValue(Response) as TJSONObject;
+  try
+    memResult.Lines.Clear;
+    JsonArray := JsonStr.GetValue('results') as TJSONArray;
+    for MensagemJson in JsonArray do
+      SimpleList(MensagemJson);
+  finally
+    JsonStr.Free;
+  end;
 end;
 
 procedure TfrmMain.btnCurrentUserClick(Sender: TObject);
@@ -203,7 +279,7 @@ var
   MensagemJson: TJSONValue;
 begin
   Parse := TParseObjects.Create('Mensagens');
-  Response := Parse.GetAllInBackGround();
+  Response := Parse.GetInBackGround();
   JsonStr := TJSONObject.ParseJSONValue(Response) as TJSONObject;
   try
     memResult.Lines.Clear;
@@ -225,7 +301,7 @@ var
   MensagemObj: TMensagem;
 begin
   Parse := TParseObjects.Create('Mensagens');
-  Response := Parse.GetAllInBackGround();
+  Response := Parse.GetInBackGround();
   JsonStr := TJSONObject.ParseJSONValue(Response) as TJSONObject;
   try
     memResult.Lines.Clear;
@@ -263,6 +339,18 @@ begin
   memResult.Lines.Clear;
   memResult.Lines.Add(Resultado);
   memResult.Lines.Add('Token: ' + User.GetSessionToken);
+end;
+
+procedure TfrmMain.btnOrderAscClick(Sender: TObject);
+begin
+  if not trim(edOrderby.Text).IsEmpty then
+    memoOrderAsc.Lines.Add(edOrderBy.Text);
+end;
+
+procedure TfrmMain.btnOrderDescClick(Sender: TObject);
+begin
+  if not trim(edOrderby.Text).IsEmpty then
+    memoOrderDesc.Lines.Add(edOrderBy.Text);
 end;
 
 end.

@@ -53,12 +53,13 @@ type
     procedure WhereContains(Key, Value: string);
     procedure Limit(Value: Integer);
     procedure Skip(Value: Integer);
+    procedure AddOrderAsc(Field: string);
+    procedure AddOrderDesc(Field: string);
 
     procedure Add(Key, Value: Variant);
 
     function SaveInBackGround: string;
     function GetInBackGround: string;
-    function GetAllInBackGround: string;
     function DeleteInBackGround(ObjectId: string): string;
   end;
 
@@ -68,6 +69,16 @@ uses
   System.SysUtils;
 
 { TDelphiParseObjects }
+
+procedure TParseObjects.AddOrderAsc(Field: string);
+begin
+  Query.AscendingOrder(Field);
+end;
+
+procedure TParseObjects.AddOrderDesc(Field: string);
+begin
+  Query.DescendingOrder(Field);
+end;
 
 constructor TParseObjects.Create(ClassName: string);
 begin
@@ -87,11 +98,6 @@ end;
 function TParseObjects.GetInBackGround: string;
 begin
   Result := Parse.Get(['classes', FClassName], nil, Query.GetParamsFormatted).ResponseAsString();
-end;
-
-function TParseObjects.GetAllInBackGround: string;
-begin
-  Result := Parse.Get(['classes', FClassName]).ResponseAsString();
 end;
 
 procedure TParseObjects.Add(Key, Value: Variant);

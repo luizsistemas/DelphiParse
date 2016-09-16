@@ -79,6 +79,10 @@ type
     procedure SetSkip(Value: Integer);
     procedure Others(Key, Value: string);
 
+    //order
+    procedure AscendingOrder(Field: string);
+    procedure DescendingOrder(Field: string);
+
     //formatted
     function GetParamsFormatted: string;
   end;
@@ -90,12 +94,13 @@ type
     procedure WhereContains(Key, Value: string);
     procedure Limit(Value: Integer);
     procedure Skip(Value: Integer);
+    procedure AddOrderAsc(Field: string);
+    procedure AddOrderDesc(Field: string);
 
     procedure Add(Key, Value: Variant);
 
     function SaveInBackGround: string;
     function GetInBackGround: string;
-    function GetAllInBackGround: string;
     function DeleteInBackGround(ObjectId: string): string;
   end;
 

@@ -45,6 +45,7 @@ type
     StartsWithParams: TDictionary<string, string>;
     ContainsParams: TDictionary<string, string>;
     OthersParams: TDictionary<string, string>;
+    Order: TList<string>;
     FLimit: Integer;
     FSkip: Integer;
     procedure ValidatesKey(Key: string; Params: TDictionary<string, string>);
@@ -55,6 +56,7 @@ type
     function FormatWhereTerms: string;
     function FormatSkip: string;
     function FormatOthers: string;
+    function FormatOrders: string;
   public
     constructor Create;
     destructor Destroy; override;
@@ -70,6 +72,10 @@ type
     procedure SetLimit(Value: Integer);
     procedure SetSkip(Value: Integer);
     procedure Others(Key, Value: string);
+
+    //order
+    procedure AscendingOrder(Field: string);
+    procedure DescendingOrder(Field: string);
 
     //formatted
     function GetParamsFormatted: string;
@@ -95,6 +101,17 @@ begin
   StartsWithParams := TDictionary<string,string>.Create;
   ContainsParams := TDictionary<string,string>.Create;
   OthersParams := TDictionary<string,string>.Create;
+  Order := TList<string>.Create;
+end;
+
+procedure TParseQuery.AscendingOrder(Field: string);
+begin
+  Order.Add(Field);
+end;
+
+procedure TParseQuery.DescendingOrder(Field: string);
+begin
+  Order.Add('-' + Field);
 end;
 
 destructor TParseQuery.Destroy;
@@ -103,6 +120,7 @@ begin
   StartsWithParams.Free;
   ContainsParams.Free;
   OthersParams.Free;
+  Order.Free;
   inherited;
 end;
 
@@ -184,6 +202,13 @@ begin
     Result := 'skip=' + FSkip.ToString;
 end;
 
+function TParseQuery.FormatOrders: string;
+begin
+  if Order.Count = 0 then
+    Exit;
+  Result := 'order=' + String.Join(',', Order.ToArray);
+end;
+
 function TParseQuery.FormatWhereTerms: string;
 var
   Formatos: Array[0..2] of string;
@@ -200,12 +225,13 @@ end;
 
 function TParseQuery.GetParamsFormatted: string;
 var
-  Terms: Array[0..3] of string;
+  Terms: Array[0..4] of string;
 begin
   Terms[0] := FormatWhereTerms;
   Terms[1] := FormatLimit;
   Terms[2] := FormatSkip;
   Terms[3] := FormatOthers;
+  Terms[4] := FormatOrders;
   Result := GetElementsNotEmpty('&', Terms);
 end;
 
