@@ -101,7 +101,8 @@ function TParseQuery.Count: Integer;
 begin
   Result := EqualToParams.Count +
             StartsWithParams.Count +
-            ContainsParams.Count;
+            ContainsParams.Count +
+            LessThenParams.Count;
 end;
 
 constructor TParseQuery.Create;
@@ -199,7 +200,7 @@ end;
 
 procedure TParseQuery.SetFormatLessThen;
 begin
- SetComparisons('"$lte":"%s"', LessThenParams);
+  SetComparisons('"$lte":"%s"', LessThenParams);
 end;
 
 function TParseQuery.FormatOthers: string;

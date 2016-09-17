@@ -51,6 +51,7 @@ type
     procedure WhereEqualTo(Key, Value: string);
     procedure WhereStartsWith(Key, Value: string);
     procedure WhereContains(Key, Value: string);
+    procedure WhereLessThen(Key, Value: string; FieldType: string = '');
     procedure Limit(Value: Integer);
     procedure Skip(Value: Integer);
     procedure Others(Key, Value: string);
@@ -131,6 +132,11 @@ end;
 procedure TParseObjects.WhereEqualTo(Key, Value: string);
 begin
   Query.WhereEqualTo(Key, Value);
+end;
+
+procedure TParseObjects.WhereLessThen(Key, Value, FieldType: string);
+begin
+  Query.WhereLessThen(Key, Value, FieldType);
 end;
 
 procedure TParseObjects.WhereStartsWith(Key, Value: string);

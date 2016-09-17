@@ -38,7 +38,6 @@ type
     Button3: TButton;
     memoOrderAsc: TMemo;
     Label1: TLabel;
-    Button1: TButton;
     memoOrderDesc: TMemo;
     Label2: TLabel;
     memoKeys: TMemo;
@@ -108,11 +107,12 @@ begin
   if memResult.Lines.Count = 0 then
   begin
     memResult.Lines.Add(
-      FormatStringLength('Objectid', 12) +
-      FormatStringLength('Username', 10) +
+      FormatStringLength('objectId', 12) +
+      FormatStringLength('username', 10) +
       FormatStringLength('createdAt', 26) +
       FormatStringLength('updatedAt', 26) +
-      FormatStringLength('Mensagem', 25));
+      FormatStringLength('level', 7) +
+      FormatStringLength('mensagem', 25));
 
     memResult.Lines.Add(stringofChar('=',100));
   end;
@@ -121,6 +121,7 @@ begin
     FormatStringLength(Value.GetValue<string>('username'), 10) +
     FormatStringLength(Value.GetValue<string>('createdAt'), 26) +
     FormatStringLength(Value.GetValue<string>('updatedAt'), 26) +
+    FormatStringLength(Value.GetValue<string>('level'), 7) +
     FormatStringLength(Value.GetValue<string>('mensagem'), 25));
 end;
 
@@ -198,16 +199,25 @@ end;
 procedure TfrmMain.btnLessThenClick(Sender: TObject);
 var
   Parse: IParseObject;
-  Resultado: string;
-  Text: string;
+  Response: string;
+  JsonStr: TJSONObject;
+  JsonArray: TJSONArray;
+  MensagemJson: TJSONValue;
+  Field: string;
 begin
-  Text := InputBox('LessThen test in the createdAt field', 'Text:','');
+  Text := InputBox('LessThen test in the Level field', 'Text:','');
   Parse := TParseObjects.Create('Mensagens');
-  Parse.WhereEqualTo('createdAt', Text);
-
-  Resultado := Parse.GetInBackGround;
-  memResult.Lines.Clear;
-  memResult.Lines.Add(Resultado);
+  Parse.WhereLessThen('level', Text);
+  Response := Parse.GetInBackGround;
+  JsonStr := TJSONObject.ParseJSONValue(Response) as TJSONObject;
+  try
+    memResult.Lines.Clear;
+    JsonArray := JsonStr.GetValue('results') as TJSONArray;
+    for MensagemJson in JsonArray do
+      SimpleList(MensagemJson);
+  finally
+    JsonStr.Free;
+  end;
 end;
 
 procedure TfrmMain.Button3Click(Sender: TObject);

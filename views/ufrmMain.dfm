@@ -4,7 +4,7 @@ object frmMain: TfrmMain
   BorderIcons = [biSystemMenu]
   Caption = 'Delphi x Parse'
   ClientHeight = 490
-  ClientWidth = 752
+  ClientWidth = 853
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +17,7 @@ object frmMain: TfrmMain
   object memResult: TMemo
     Left = 0
     Top = 0
-    Width = 752
+    Width = 853
     Height = 292
     Align = alClient
     Font.Charset = ANSI_CHARSET
@@ -28,15 +28,17 @@ object frmMain: TfrmMain
     ParentFont = False
     ScrollBars = ssBoth
     TabOrder = 0
+    ExplicitWidth = 752
   end
   object GroupBox1: TGroupBox
     Left = 0
     Top = 440
-    Width = 752
+    Width = 853
     Height = 50
     Align = alBottom
     Caption = 'Users'
     TabOrder = 1
+    ExplicitWidth = 752
     object edUsername: TEdit
       Left = 8
       Top = 16
@@ -101,13 +103,15 @@ object frmMain: TfrmMain
   object PageControl1: TPageControl
     Left = 0
     Top = 292
-    Width = 752
+    Width = 853
     Height = 148
-    ActivePage = TabSheet3
+    ActivePage = TabSheet2
     Align = alBottom
     TabOrder = 2
+    ExplicitWidth = 752
     object TabSheet1: TTabSheet
       Caption = 'Send Message'
+      ExplicitWidth = 744
       object editUser: TEdit
         Left = 8
         Top = 20
@@ -157,6 +161,7 @@ object frmMain: TfrmMain
       ImageIndex = 1
       ExplicitLeft = 36
       ExplicitTop = 32
+      ExplicitWidth = 744
       object Label3: TLabel
         Left = 280
         Top = 0
@@ -205,7 +210,7 @@ object frmMain: TfrmMain
         OnClick = btnContainsClick
       end
       object btnJsonToMemo: TButton
-        Left = 576
+        Left = 672
         Top = 7
         Width = 75
         Height = 25
@@ -215,7 +220,7 @@ object frmMain: TfrmMain
         OnClick = btnJsonToMemoClick
       end
       object btnJsonToObj: TButton
-        Left = 656
+        Left = 752
         Top = 7
         Width = 81
         Height = 25
@@ -248,6 +253,7 @@ object frmMain: TfrmMain
     object TabSheet3: TTabSheet
       Caption = 'Order'
       ImageIndex = 2
+      ExplicitWidth = 744
       object Label1: TLabel
         Left = 8
         Top = 5
@@ -263,12 +269,12 @@ object frmMain: TfrmMain
         Caption = 'Descending Order'
       end
       object Button3: TButton
-        Left = 200
+        Left = 8
         Top = 83
-        Width = 185
+        Width = 377
         Height = 25
         Caption = 'Get Simple List'
-        TabOrder = 3
+        TabOrder = 2
         TabStop = False
         OnClick = Button3Click
       end
@@ -277,23 +283,14 @@ object frmMain: TfrmMain
         Top = 21
         Width = 185
         Height = 57
-        TabOrder = 1
-      end
-      object Button1: TButton
-        Left = 8
-        Top = 83
-        Width = 185
-        Height = 25
-        Caption = 'Clear Orders'
         TabOrder = 0
-        TabStop = False
       end
       object memoOrderDesc: TMemo
         Left = 200
         Top = 21
         Width = 185
         Height = 57
-        TabOrder = 2
+        TabOrder = 1
       end
     end
   end

@@ -36,6 +36,8 @@ interface
 uses System.JSON, System.SysUtils, System.Generics.Collections;
 
 type
+  TFieldType = (tpString, tpNumeric, tpDateStamp, tpNull);
+
   IResponseParse = interface
     ['{D356B879-8FAC-47BC-8946-7418497C1047}']
     function ResponseAsString(const Encoding: TEncoding = nil): string;
@@ -94,6 +96,7 @@ type
     procedure WhereEqualTo(Key, Value: string);
     procedure WhereStartsWith(Key, Value: string);
     procedure WhereContains(Key, Value: string);
+    procedure WhereLessThen(Key, Value: string; FieldType: string = '');
     procedure Limit(Value: Integer);
     procedure Skip(Value: Integer);
     procedure Others(Key, Value: string);
