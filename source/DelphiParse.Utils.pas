@@ -34,27 +34,58 @@ unit DelphiParse.Utils;
 interface
 
 uses
-  System.SysUtils, Generics.Collections;
+  System.SysUtils, DelphiParse.Interfaces, Generics.Collections,
+   DelphiParse.Constraints, System.JSON, Variants;
 type
   ExceptionParseKeyDuplicate = class(Exception);
 
-  TParams = record
-    Key: string;
-    Value: string;
-    FieldType: string;
-  end;
+procedure AddParams(Key, Value: string; Params: TList<TParams>; FieldType: TFieldType = ftString);
+procedure ValidatesKey(Key: string; Params: TList<TParams>);
 
 function GetElementsNotEmpty(Separator: String; Elements: Array of string): string;
 function FormatParams(CustomParameter: string; Params: TList<TParams>): string;
-procedure AddParams(Key, Value, FieldType: string; Params: TList<TParams>);
-procedure ValidatesKey(Key: string; Params: TList<TParams>);
 function ContainsKey(Key: string; List: TList<TParams>): Boolean;
 function GetIndexParams(Key: string; List: TList<TParams>): Integer;
+function GetDataTypeFormatValue(Param: TParams): string;
+function FormatJsonValue(Value: Variant): TJSONValue;
 
 implementation
 
 uses
    System.Net.URLClient;
+
+function FormatJsonValue(Value: Variant): TJSONValue;
+var
+  FieldType  : Integer;
+begin
+  FieldType := VarType(Value) and VarTypeMask;
+  case FieldType of
+    varNull:      Result := TJSONNull.Create;
+    varSmallInt,
+    varInteger,
+    varInt64,
+    varSingle,
+    varDouble,
+    varCurrency:  Result := TJSONNumber.Create(Value);
+    varDate:      Result := TJSONString.Create(Value);
+    varBoolean:   Result := TJSONBool.Create(Value);
+  else
+    Result := TJSONString.Create(Value);
+  end;
+end;
+
+function GetDataTypeFormatValue(Param: TParams): string;
+var
+  Value: string;
+begin
+  case Param.FieldType of
+    ftString: Value := '""'.Insert(1,Param.Value);
+    ftDateTime: Value := Format('{"__type": "Date", "iso": "%s"}', [Param.Value]);
+  else
+    Value := Param.Value;
+  end;
+  Result := Value;
+end;
 
 function GetIndexParams(Key: string; List: TList<TParams>): Integer;
 var
@@ -82,7 +113,7 @@ begin
     raise ExceptionParseKeyDuplicate.Create('Key already exists with that name');
 end;
 
-procedure AddParams(Key, Value, FieldType: string; Params: TList<TParams>);
+procedure AddParams(Key, Value: string; Params: TList<TParams>; FieldType: TFieldType);
 var
   Param: TParams;
 begin

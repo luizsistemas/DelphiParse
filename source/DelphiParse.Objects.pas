@@ -34,7 +34,7 @@ unit DelphiParse.Objects;
 interface
 
 uses DelphiParse, DelphiParse.Interfaces, System.JSON,
-  System.Generics.Collections, DelphiParse.Configuration,
+
   DelphiParse.Query;
 
 type
@@ -51,7 +51,8 @@ type
     procedure WhereEqualTo(Key, Value: string);
     procedure WhereStartsWith(Key, Value: string);
     procedure WhereContains(Key, Value: string);
-    procedure WhereLessThen(Key, Value: string; FieldType: string = '');
+    procedure WhereLessThan(Key, Value: string; FieldType: TFieldType = ftString);
+    procedure WhereGreaterThan(Key, Value: string; FieldType: TFieldType = ftString);
     procedure Limit(Value: Integer);
     procedure Skip(Value: Integer);
     procedure Others(Key, Value: string);
@@ -60,7 +61,7 @@ type
     procedure AddOrderAsc(Field: string);
     procedure AddOrderDesc(Field: string);
 
-    procedure Add(Key, Value: Variant);
+    procedure Add(Key: String; Value: Variant);
 
     function SaveInBackGround: string;
     function GetInBackGround: string;
@@ -70,7 +71,7 @@ type
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils, Variants, DelphiParse.Utils;
 
 { TDelphiParseObjects }
 
@@ -109,9 +110,9 @@ begin
   Result := Parse.Get(['classes', FClassName], nil, Query.GetParamsFormatted).ResponseAsString();
 end;
 
-procedure TParseObjects.Add(Key, Value: Variant);
+procedure TParseObjects.Add(Key: String; Value: Variant);
 begin
-  Obj.AddPair(Key, Value);
+  Obj.AddPair(Key, FormatJsonValue(Value));
 end;
 
 function TParseObjects.SaveInBackGround: string;
@@ -134,9 +135,15 @@ begin
   Query.WhereEqualTo(Key, Value);
 end;
 
-procedure TParseObjects.WhereLessThen(Key, Value, FieldType: string);
+procedure TParseObjects.WhereGreaterThan(Key, Value: string;
+  FieldType: TFieldType);
 begin
-  Query.WhereLessThen(Key, Value, FieldType);
+  Query.WhereGreaterThan(Key, Value, FieldType);
+end;
+
+procedure TParseObjects.WhereLessThan(Key, Value: string; FieldType: TFieldType);
+begin
+  Query.WhereLessThan(Key, Value, FieldType);
 end;
 
 procedure TParseObjects.WhereStartsWith(Key, Value: string);

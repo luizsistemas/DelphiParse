@@ -43,6 +43,8 @@ type
     memoKeys: TMemo;
     Label3: TLabel;
     btnLessThen: TButton;
+    btnGreaterThan: TButton;
+    edLevel: TEdit;
     procedure btnSendClick(Sender: TObject);
     procedure btnGetAllClick(Sender: TObject);
     procedure btnJsonToObjClick(Sender: TObject);
@@ -57,11 +59,13 @@ type
     procedure btnDeleteClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure btnLessThenClick(Sender: TObject);
+    procedure btnGreaterThanClick(Sender: TObject);
   private
     procedure ObjetoToMemo(MensagemObj: TMensagem);
     procedure JsonToMemo(Value: TJsonValue);
     procedure SimpleList(Value: TJsonValue);
     function FormatStringLength(Value: string; Size: Integer): string;
+    procedure LerResponse(Response: string);
   public
   end;
 
@@ -128,16 +132,14 @@ end;
 procedure TfrmMain.btnContainsClick(Sender: TObject);
 var
   Parse: IParseObject;
-  Resultado: string;
+  Response: string;
   Text: string;
 begin
   Text := InputBox('Contains test in the Mensagem field', 'Text:','');
   Parse := TParseObjects.Create('Mensagens');
   Parse.WhereContains('mensagem', Text);
-
-  Resultado := Parse.GetInBackGround;
-  memResult.Lines.Clear;
-  memResult.Lines.Add(Resultado);
+  Response := Parse.GetInBackGround;
+  LerResponse(Response);
 end;
 
 procedure TfrmMain.btnGetAllClick(Sender: TObject);
@@ -151,6 +153,18 @@ begin
   Resultado := Parse.GetInBackGround();
   memResult.Lines.Clear;
   memResult.Lines.Add(Resultado);
+end;
+
+procedure TfrmMain.btnGreaterThanClick(Sender: TObject);
+var
+  Parse: IParseObject;
+  Response: string;
+begin
+  Text := InputBox('GreaterThan test in the Level field', 'Text:','');
+  Parse := TParseObjects.Create('Mensagens');
+  Parse.WhereGreaterThan('level', Text, ftNumber);
+  Response := Parse.GetInBackGround;
+  LerResponse(Response);
 end;
 
 procedure TfrmMain.btnInsertUserClick(Sender: TObject);
@@ -176,6 +190,7 @@ begin
   Parse := TParseObjects.Create('Mensagens');
   Parse.Add('username', editUser.Text);
   Parse.Add('mensagem', editMessage.Text);
+  Parse.Add('level', StrToInt(edLevel.Text));
   Resultado := Parse.SaveInBackGround;
   memResult.Lines.Clear;
   memResult.Lines.Add(Resultado);
@@ -184,31 +199,22 @@ end;
 procedure TfrmMain.btnStartsWithClick(Sender: TObject);
 var
   Parse: IParseObject;
-  Resultado: string;
+  Response: string;
   Text: string;
 begin
   Text := InputBox('StartsWith test in the Username field', 'Text:','');
   Parse := TParseObjects.Create('Mensagens');
   Parse.WhereStartsWith('username', Text);
-
-  Resultado := Parse.GetInBackGround;
-  memResult.Lines.Clear;
-  memResult.Lines.Add(Resultado);
+  Response := Parse.GetInBackGround;
+  LerResponse(Response);
 end;
 
-procedure TfrmMain.btnLessThenClick(Sender: TObject);
+procedure TfrmMain.LerResponse(Response: string);
 var
-  Parse: IParseObject;
-  Response: string;
   JsonStr: TJSONObject;
   JsonArray: TJSONArray;
   MensagemJson: TJSONValue;
-  Field: string;
 begin
-  Text := InputBox('LessThen test in the Level field', 'Text:','');
-  Parse := TParseObjects.Create('Mensagens');
-  Parse.WhereLessThen('level', Text);
-  Response := Parse.GetInBackGround;
   JsonStr := TJSONObject.ParseJSONValue(Response) as TJSONObject;
   try
     memResult.Lines.Clear;
@@ -220,14 +226,22 @@ begin
   end;
 end;
 
-procedure TfrmMain.Button3Click(Sender: TObject);
+procedure TfrmMain.btnLessThenClick(Sender: TObject);
 var
   Parse: IParseObject;
   Response: string;
-  JsonStr: TJSONObject;
-  JsonArray: TJSONArray;
-  MensagemJson: TJSONValue;
-  Field: string;
+begin
+  Text := InputBox('LessThen test in the Level field', 'Text:','');
+  Parse := TParseObjects.Create('Mensagens');
+  Parse.WhereLessThan('level', Text, ftNumber);
+  Response := Parse.GetInBackGround;
+  LerResponse(Response);
+end;
+
+procedure TfrmMain.Button3Click(Sender: TObject);
+var
+  Parse: IParseObject;
+  Response, Field: string;
 begin
   Parse := TParseObjects.Create('Mensagens');
   for Field in memoOrderAsc.Lines do
@@ -235,15 +249,7 @@ begin
   for Field in memoOrderDesc.Lines do
      Parse.AddOrderDesc(Field);
   Response := Parse.GetInBackGround();
-  JsonStr := TJSONObject.ParseJSONValue(Response) as TJSONObject;
-  try
-    memResult.Lines.Clear;
-    JsonArray := JsonStr.GetValue('results') as TJSONArray;
-    for MensagemJson in JsonArray do
-      SimpleList(MensagemJson);
-  finally
-    JsonStr.Free;
-  end;
+  LerResponse(Response);
 end;
 
 procedure TfrmMain.btnCurrentUserClick(Sender: TObject);
@@ -280,16 +286,15 @@ end;
 procedure TfrmMain.btnEqualClick(Sender: TObject);
 var
   Parse: IParseObject;
-  Resultado: string;
+  Response: string;
   Text: string;
 begin
   Text := InputBox('EqualTo test in the Username field', 'Text:','');
   Parse := TParseObjects.Create('Mensagens');
   Parse.WhereEqualTo('username', Text);
 
-  Resultado := Parse.GetInBackGround;
-  memResult.Lines.Clear;
-  memResult.Lines.Add(Resultado);
+  Response := Parse.GetInBackGround;
+  LerResponse(Response);
 end;
 
 procedure TfrmMain.btnJsonToMemoClick(Sender: TObject);

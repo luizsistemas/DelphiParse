@@ -34,16 +34,13 @@ unit DelphiParse.Query;
 interface
 
 uses System.Generics.Collections, System.SysUtils,
-  DelphiParse.Interfaces, DelphiParse.Utils, System.Net.URLClient;
+  DelphiParse.Interfaces, DelphiParse.Utils,
+  DelphiParse.Constraints, System.Net.URLClient;
 
 type
   TParseQuery = class(TInterfacedObject, IParseQuery)
   private
-    EqualToParams: TList<TParams>;
-    StartsWithParams: TList<TParams>;
-    ContainsParams: TList<TParams>;
-    LessThenParams: TList<TParams>;
-    OthersParams: TList<TParams>;
+    Constraints: TConstraints;
     ComparisonsParams: TList<TParams>;
     Keys: TList<string>;
     Order: TList<string>;
@@ -55,7 +52,8 @@ type
     procedure SetComparisons(ParameterValue: string; Params: TList<TParams>);
     procedure SetFormatStartsWith;
     procedure SetFormatContains;
-    procedure SetFormatLessThen;
+    procedure SetFormatGreaterThan;
+    procedure SetFormatLessThan;
 
     function FormatComparisons: String;
 
@@ -75,7 +73,8 @@ type
     procedure WhereEqualTo(Key, Value: string);
     procedure WhereStartsWith(Key, Value: string);
     procedure WhereContains(Key, Value: string);
-    procedure WhereLessThen(Key, Value: string; FieldType: string = '');
+    procedure WhereLessThan(Key, Value: string; FieldType: TFieldType = ftString);
+    procedure WhereGreaterThan(Key, Value: string; FieldType: TFieldType = ftString);
 
     //others
     procedure SetLimit(Value: Integer);
@@ -99,32 +98,21 @@ uses Dialogs;
 
 function TParseQuery.Count: Integer;
 begin
-  Result := EqualToParams.Count +
-            StartsWithParams.Count +
-            ContainsParams.Count +
-            LessThenParams.Count;
+  Result := Constraints.CountWhere;
 end;
 
 constructor TParseQuery.Create;
 begin
   inherited;
-  EqualToParams := TList<TParams>.Create;
-  StartsWithParams := TList<TParams>.Create;
-  ContainsParams := TList<TParams>.Create;
-  LessThenParams := TList<TParams>.Create;
+  Constraints := TConstraints.Create;
   ComparisonsParams := TList<TParams>.Create();
-  OthersParams := TList<TParams>.Create;
   Keys := TList<string>.Create;
   Order := TList<string>.Create;
 end;
 
 destructor TParseQuery.Destroy;
 begin
-  EqualToParams.Free;
-  StartsWithParams.Free;
-  ContainsParams.Free;
-  LessThenParams.Free;
-  OthersParams.Free;
+  Constraints.Free;
   ComparisonsParams.Free;
   Keys.Free;
   Order.Free;
@@ -148,14 +136,15 @@ end;
 
 function TParseQuery.FormatEqualTo: string;
 begin
-  Result := FormatParams('"%s":"%s"', EqualToParams);
+  Result := FormatParams('"%s":"%s"', Constraints.Items(ctEqualTo));
 end;
 
 function TParseQuery.FormatComparisons: String;
 begin
   SetFormatStartsWith;
   SetFormatContains;
-  SetFormatLessThen;
+  SetFormatLessThan;
+  SetFormatGreaterThan;
   Result := FormatParams('"%s":{%s}', ComparisonsParams);
 end;
 
@@ -170,7 +159,7 @@ begin
 
   for Param in Params do
   begin
-    Value := Format(ParameterValue, [Param.Value]);
+    Value := Format(ParameterValue, [GetDataTypeFormatValue(Param)]);
     ComparisonParam.Key := TURI.URLDecode(Param.Key);
     ComparisonParam.FieldType := Param.FieldType;
     if ContainsKey(Param.Key, ComparisonsParams) then
@@ -190,22 +179,27 @@ end;
 
 procedure TParseQuery.SetFormatStartsWith;
 begin
-  SetComparisons('"$regex":"^%s"', StartsWithParams);
+  SetComparisons('"$regex":%s', Constraints.Items(ctStartsWith));
 end;
 
 procedure TParseQuery.SetFormatContains;
 begin
-  SetComparisons('"$regex":"%s"', ContainsParams);
+  SetComparisons('"$regex":%s', Constraints.Items(ctContains));
 end;
 
-procedure TParseQuery.SetFormatLessThen;
+procedure TParseQuery.SetFormatLessThan;
 begin
-  SetComparisons('"$lte":"%s"', LessThenParams);
+  SetComparisons('"$lte":%s', Constraints.Items(ctLessThan));
+end;
+
+procedure TParseQuery.SetFormatGreaterThan;
+begin
+  SetComparisons('"$gte":%s', Constraints.Items(ctGreaterThan));
 end;
 
 function TParseQuery.FormatOthers: string;
 begin
-  Result := FormatParams('"%s":"%s"', OthersParams);
+  Result := FormatParams('"%s":"%s"', Constraints.Items(ctOthers));
 end;
 
 function TParseQuery.FormatLimit: string;
@@ -270,27 +264,33 @@ end;
 
 procedure TParseQuery.Others(Key, Value: string);
 begin
-  AddParams(Key, Value, '', OthersParams);
+  AddParams(Key, Value, Constraints.Items(ctOthers));
 end;
 
 procedure TParseQuery.WhereContains(Key, Value: string);
 begin
-  AddParams(Key, Value, '', ContainsParams);
+  AddParams(Key, Value, Constraints.Items(ctContains));
 end;
 
 procedure TParseQuery.WhereEqualTo(Key, Value: string);
 begin
-  AddParams(Key, Value, '', EqualToParams);
+  AddParams(Key, Value, Constraints.Items(ctEqualTo));
 end;
 
-procedure TParseQuery.WhereLessThen(Key, Value, FieldType: string);
+procedure TParseQuery.WhereGreaterThan(Key, Value: string;
+  FieldType: TFieldType);
 begin
-  AddParams(Key, Value, '', LessThenParams);
+  AddParams(Key, Value, Constraints.Items(ctGreaterThan), FieldType);
+end;
+
+procedure TParseQuery.WhereLessThan(Key, Value: string; FieldType: TFieldType);
+begin
+  AddParams(Key, Value, Constraints.Items(ctLessThan), FieldType);
 end;
 
 procedure TParseQuery.WhereStartsWith(Key, Value: string);
 begin
-  AddParams(Key, Value, '', StartsWithParams);
+  AddParams(Key, '^' + Value, Constraints.Items(ctStartsWith));
 end;
 
 end.

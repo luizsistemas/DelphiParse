@@ -33,10 +33,10 @@ unit DelphiParse.Interfaces;
 
 interface
 
-uses System.JSON, System.SysUtils, System.Generics.Collections;
+uses System.JSON, System.SysUtils;
 
 type
-  TFieldType = (tpString, tpNumeric, tpDateStamp, tpNull);
+  TFieldType = (ftString, ftNumber, ftBoolean, ftDateTime, ftNull);
 
   IResponseParse = interface
     ['{D356B879-8FAC-47BC-8946-7418497C1047}']
@@ -75,7 +75,8 @@ type
     procedure WhereEqualTo(Key, Value: string);
     procedure WhereStartsWith(Key, Value: string);
     procedure WhereContains(Key, Value: string);
-    procedure WhereLessThen(Key, Value: string; FieldType: string = '');
+    procedure WhereLessThan(Key, Value: string; FieldType: TFieldType = ftString);
+    procedure WhereGreaterThan(Key, Value: string; FieldType: TFieldType = ftString);
 
     //others
     procedure SetLimit(Value: Integer);
@@ -96,7 +97,8 @@ type
     procedure WhereEqualTo(Key, Value: string);
     procedure WhereStartsWith(Key, Value: string);
     procedure WhereContains(Key, Value: string);
-    procedure WhereLessThen(Key, Value: string; FieldType: string = '');
+    procedure WhereLessThan(Key, Value: string; FieldType: TFieldType = ftString);
+    procedure WhereGreaterThan(Key, Value: string; FieldType: TFieldType = ftString);
     procedure Limit(Value: Integer);
     procedure Skip(Value: Integer);
     procedure Others(Key, Value: string);
@@ -104,7 +106,7 @@ type
     procedure AddOrderAsc(Field: string);
     procedure AddOrderDesc(Field: string);
 
-    procedure Add(Key, Value: Variant);
+    procedure Add(Key: String; Value: Variant);
 
     function SaveInBackGround: string;
     function GetInBackGround: string;

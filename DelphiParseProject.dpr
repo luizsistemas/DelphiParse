@@ -11,7 +11,8 @@ uses
   Mensagem in 'model\Mensagem.pas',
   DelphiParse.Query in 'source\DelphiParse.Query.pas',
   DelphiParse.Utils in 'source\DelphiParse.Utils.pas',
-  DelphiParse.User in 'source\DelphiParse.User.pas';
+  DelphiParse.User in 'source\DelphiParse.User.pas',
+  DelphiParse.Constraints in 'source\DelphiParse.Constraints.pas';
 
 {$R *.res}
 

@@ -34,7 +34,7 @@ unit DelphiParse;
 interface
 
 uses DelphiParse.Interfaces, System.JSON, System.Net.HttpClient,
-  System.SysUtils, System.Generics.Collections,
+  System.SysUtils,
   DelphiParse.Configuration, System.NetConsts, System.StrUtils;
 
 type

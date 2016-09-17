@@ -123,7 +123,7 @@ object frmMain: TfrmMain
       object editMessage: TEdit
         Left = 136
         Top = 20
-        Width = 281
+        Width = 193
         Height = 21
         TabOrder = 1
         TextHint = 'Mensagem...'
@@ -134,7 +134,7 @@ object frmMain: TfrmMain
         Width = 89
         Height = 21
         Caption = 'Send Message'
-        TabOrder = 2
+        TabOrder = 3
         OnClick = btnSendClick
       end
       object btnUpdate: TButton
@@ -143,7 +143,7 @@ object frmMain: TfrmMain
         Width = 89
         Height = 21
         Caption = 'Update Message'
-        TabOrder = 3
+        TabOrder = 4
         OnClick = btnDeleteClick
       end
       object btnDelete: TButton
@@ -152,8 +152,17 @@ object frmMain: TfrmMain
         Width = 89
         Height = 21
         Caption = 'Delete Message'
-        TabOrder = 4
+        TabOrder = 5
         OnClick = btnDeleteClick
+      end
+      object edLevel: TEdit
+        Left = 336
+        Top = 20
+        Width = 81
+        Height = 21
+        NumbersOnly = True
+        TabOrder = 2
+        TextHint = 'Level...'
       end
     end
     object TabSheet2: TTabSheet
@@ -244,10 +253,20 @@ object frmMain: TfrmMain
         Top = 36
         Width = 75
         Height = 25
-        Caption = 'Less Then'
+        Caption = 'Less Than'
         TabOrder = 7
         TabStop = False
         OnClick = btnLessThenClick
+      end
+      object btnGreaterThan: TButton
+        Left = 88
+        Top = 36
+        Width = 81
+        Height = 25
+        Caption = 'Greater Than'
+        TabOrder = 8
+        TabStop = False
+        OnClick = btnGreaterThanClick
       end
     end
     object TabSheet3: TTabSheet
