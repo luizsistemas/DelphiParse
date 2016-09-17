@@ -24,7 +24,8 @@ uses
   DelphiParse.User in '..\source\DelphiParse.User.pas',
   DelphiParse in '..\source\DelphiParse.pas',
   DelphiParse.Objects in '..\source\DelphiParse.Objects.pas',
-  DelphiParse.Configuration in '..\source\DelphiParse.Configuration.pas';
+  DelphiParse.Configuration in '..\source\DelphiParse.Configuration.pas',
+  DelphiParse.Constraints in '..\source\DelphiParse.Constraints.pas';
 
 {$R *.RES}
 
