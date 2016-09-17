@@ -87,7 +87,7 @@ procedure TTestQuery.FormatarComDoisParametros;
 begin
   Query.WhereEqualTo('username','luiz');
   Query.WhereEqualTo('city','São Paulo');
-  CheckEqualsString('where={"city":"São Paulo","username":"luiz"}', Query.GetParamsFormatted);
+  CheckEqualsString('where={"username":"luiz","city":"São Paulo"}', Query.GetParamsFormatted);
 end;
 
 procedure TTestQuery.FormatarEqualToComStartsWith;

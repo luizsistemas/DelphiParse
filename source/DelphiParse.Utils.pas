@@ -34,13 +34,11 @@ unit DelphiParse.Utils;
 interface
 
 uses
-  System.SysUtils;
+  System.SysUtils, Generics.Collections;
 
 function GetElementsNotEmpty(Separator: String; Elements: Array of string): string;
 
 implementation
-
-uses Generics.Collections;
 
 function GetElementsNotEmpty(Separator: String; Elements: Array of string): string;
 var

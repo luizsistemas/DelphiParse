@@ -30,9 +30,6 @@ type
     btnEqual: TButton;
     btnStartsWith: TButton;
     btnContains: TButton;
-    editEqual: TEdit;
-    editStarts: TEdit;
-    editContains: TEdit;
     btnJsonToMemo: TButton;
     btnJsonToObj: TButton;
     TabSheet3: TTabSheet;
@@ -47,10 +44,9 @@ type
     Button1: TButton;
     memoOrderDesc: TMemo;
     Label2: TLabel;
-    btnAddKey: TButton;
-    edKey: TEdit;
     memoKeys: TMemo;
     Label3: TLabel;
+    btnLessThen: TButton;
     procedure btnSendClick(Sender: TObject);
     procedure btnGetAllClick(Sender: TObject);
     procedure btnJsonToObjClick(Sender: TObject);
@@ -65,8 +61,7 @@ type
     procedure btnDeleteClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure btnOrderAscClick(Sender: TObject);
-    procedure btnOrderDescClick(Sender: TObject);
+    procedure btnLessThenClick(Sender: TObject);
   private
     procedure ObjetoToMemo(MensagemObj: TMensagem);
     procedure JsonToMemo(Value: TJsonValue);
@@ -137,13 +132,15 @@ procedure TfrmMain.btnContainsClick(Sender: TObject);
 var
   Parse: IParseObject;
   Resultado: string;
+  Text: string;
 begin
-    Parse := TParseObjects.Create('Mensagens');
-    Parse.WhereContains('mensagem', editContains.Text);
+  Text := InputBox('Contains test in the Mensagem field', 'Text:','');
+  Parse := TParseObjects.Create('Mensagens');
+  Parse.WhereContains('mensagem', Text);
 
-    Resultado := Parse.GetInBackGround;
-    memResult.Lines.Clear;
-    memResult.Lines.Add(Resultado);
+  Resultado := Parse.GetInBackGround;
+  memResult.Lines.Clear;
+  memResult.Lines.Add(Resultado);
 end;
 
 procedure TfrmMain.btnGetAllClick(Sender: TObject);
@@ -155,10 +152,8 @@ begin
   for Key in memoKeys.Lines do
     Parse.AddRestrictFields(Key);
   Resultado := Parse.GetInBackGround();
-  memResult.WordWrap := true;
   memResult.Lines.Clear;
   memResult.Lines.Add(Resultado);
-  memResult.WordWrap := false;
 end;
 
 procedure TfrmMain.btnInsertUserClick(Sender: TObject);
@@ -193,19 +188,36 @@ procedure TfrmMain.btnStartsWithClick(Sender: TObject);
 var
   Parse: IParseObject;
   Resultado: string;
+  Text: string;
 begin
-    Parse := TParseObjects.Create('Mensagens');
-    Parse.WhereStartsWith('username', editStarts.Text);
+  Text := InputBox('StartsWith test in the Username field', 'Text:','');
+  Parse := TParseObjects.Create('Mensagens');
+  Parse.WhereStartsWith('username', Text);
 
-    Resultado := Parse.GetInBackGround;
-    memResult.Lines.Clear;
-    memResult.Lines.Add(Resultado);
+  Resultado := Parse.GetInBackGround;
+  memResult.Lines.Clear;
+  memResult.Lines.Add(Resultado);
 end;
 
 procedure TfrmMain.Button1Click(Sender: TObject);
 begin
   memoOrderAsc.Clear;
   memoOrderDesc.Clear;
+end;
+
+procedure TfrmMain.btnLessThenClick(Sender: TObject);
+var
+  Parse: IParseObject;
+  Resultado: string;
+  Text: string;
+begin
+  Text := InputBox('LessThen test in the createdAt field', 'Text:','');
+  Parse := TParseObjects.Create('Mensagens');
+  Parse.WhereEqualTo('createdAt', Text);
+
+  Resultado := Parse.GetInBackGround;
+  memResult.Lines.Clear;
+  memResult.Lines.Add(Resultado);
 end;
 
 procedure TfrmMain.Button3Click(Sender: TObject);
@@ -269,13 +281,15 @@ procedure TfrmMain.btnEqualClick(Sender: TObject);
 var
   Parse: IParseObject;
   Resultado: string;
+  Text: string;
 begin
-    Parse := TParseObjects.Create('Mensagens');
-    Parse.WhereEqualTo('username', editEqual.Text);
+  Text := InputBox('EqualTo test in the Username field', 'Text:','');
+  Parse := TParseObjects.Create('Mensagens');
+  Parse.WhereEqualTo('username', Text);
 
-    Resultado := Parse.GetInBackGround;
-    memResult.Lines.Clear;
-    memResult.Lines.Add(Resultado);
+  Resultado := Parse.GetInBackGround;
+  memResult.Lines.Clear;
+  memResult.Lines.Add(Resultado);
 end;
 
 procedure TfrmMain.btnJsonToMemoClick(Sender: TObject);
@@ -347,18 +361,6 @@ begin
   memResult.Lines.Clear;
   memResult.Lines.Add(Resultado);
   memResult.Lines.Add('Token: ' + User.GetSessionToken);
-end;
-
-procedure TfrmMain.btnOrderAscClick(Sender: TObject);
-begin
-  if not trim(edOrderby.Text).IsEmpty then
-    memoOrderAsc.Lines.Add(edOrderBy.Text);
-end;
-
-procedure TfrmMain.btnOrderDescClick(Sender: TObject);
-begin
-  if not trim(edOrderby.Text).IsEmpty then
-    memoOrderDesc.Lines.Add(edOrderBy.Text);
 end;
 
 end.

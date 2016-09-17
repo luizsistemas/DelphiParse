@@ -16,47 +16,11 @@ type
     procedure NovoUsuarioDeveTerUsernameInformado;
     procedure NovoUsuarioDeveTerPasswordInformado;
     procedure NovoUsuarioDeveTerEmailInformado;
-    procedure AdicionarCampoCustomizadoComNomeDoUserName;
-    procedure AdicionarCampoCustomizadoComNomeDoPassword;
-    procedure AdicionarCampoCustomizadoComNomeDoEmail;
   end;
 
 implementation
 
 { TTestParseUser }
-
-procedure TTestParseUser.AdicionarCampoCustomizadoComNomeDoPassword;
-begin
-  StartExpectingException(ExceptionParseKeyDuplicate);
-  ParseUser.SetUserName('mauro');
-  ParseUser.SetPassword('123456');
-  ParseUser.SetEmail('test@tes');
-  ParseUser.Add('password', '123456');
-  ParseUser.SignUpInBackground;
-  StopExpectingException('Inseriu custom field com nome de pasword');
-end;
-
-procedure TTestParseUser.AdicionarCampoCustomizadoComNomeDoUserName;
-begin
-  StartExpectingException(ExceptionParseKeyDuplicate);
-  ParseUser.SetUserName('mauro');
-  ParseUser.SetPassword('123456');
-  ParseUser.SetEmail('test@tes');
-  ParseUser.Add('username', 'mauro');
-  ParseUser.SignUpInBackground;
-  StopExpectingException('Inseriu custom field com nome de "username"');
-end;
-
-procedure TTestParseUser.AdicionarCampoCustomizadoComNomeDoEmail;
-begin
-  StartExpectingException(ExceptionParseKeyDuplicate);
-  ParseUser.SetUserName('mauro');
-  ParseUser.SetPassword('123456');
-  ParseUser.SetEmail('test@tes');
-  ParseUser.Add('email', 'pe@tes');
-  ParseUser.SignUpInBackground;
-  StopExpectingException('Inseriu custom field com nome de "email"');
-end;
 
 procedure TTestParseUser.NovoUsuarioDeveTerUsernameInformado;
 begin

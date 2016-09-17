@@ -73,6 +73,7 @@ type
     procedure WhereEqualTo(Key, Value: string);
     procedure WhereStartsWith(Key, Value: string);
     procedure WhereContains(Key, Value: string);
+    procedure WhereLessThen(Key, Value: string; FieldType: string = '');
 
     //others
     procedure SetLimit(Value: Integer);
@@ -95,6 +96,7 @@ type
     procedure WhereContains(Key, Value: string);
     procedure Limit(Value: Integer);
     procedure Skip(Value: Integer);
+    procedure Others(Key, Value: string);
     procedure AddRestrictFields(Field: string);
     procedure AddOrderAsc(Field: string);
     procedure AddOrderDesc(Field: string);

@@ -53,6 +53,8 @@ type
     procedure WhereContains(Key, Value: string);
     procedure Limit(Value: Integer);
     procedure Skip(Value: Integer);
+    procedure Others(Key, Value: string);
+
     procedure AddRestrictFields(Field: string);
     procedure AddOrderAsc(Field: string);
     procedure AddOrderDesc(Field: string);
@@ -83,7 +85,7 @@ end;
 
 procedure TParseObjects.AddRestrictFields(Field: string);
 begin
-  Query.
+  Query.AddRestrictFields(Field);
 end;
 
 constructor TParseObjects.Create(ClassName: string);
@@ -139,6 +141,11 @@ end;
 procedure TParseObjects.Limit(Value: Integer);
 begin
   Query.SetLimit(Value);
+end;
+
+procedure TParseObjects.Others(Key, Value: string);
+begin
+  Query.Others(Key, Value);
 end;
 
 procedure TParseObjects.Skip(Value: Integer);
