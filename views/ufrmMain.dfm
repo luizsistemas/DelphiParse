@@ -249,79 +249,51 @@ object frmMain: TfrmMain
       Caption = 'Order'
       ImageIndex = 2
       object Label1: TLabel
-        Left = 200
-        Top = 13
+        Left = 8
+        Top = 5
         Width = 80
         Height = 13
         Caption = 'Ascending Order'
       end
       object Label2: TLabel
-        Left = 392
-        Top = 13
+        Left = 200
+        Top = 5
         Width = 86
         Height = 13
         Caption = 'Descending Order'
       end
-      object edOrderBy: TEdit
-        Left = 8
-        Top = 14
-        Width = 185
-        Height = 21
-        TabStop = False
-        TabOrder = 0
-        TextHint = 'Order by...'
-      end
-      object btnOrderAsc: TButton
-        Left = 8
-        Top = 37
-        Width = 185
-        Height = 25
-        Caption = 'Add Ascending Order'
-        TabOrder = 1
-        TabStop = False
-      end
-      object btnOrderDesc: TButton
-        Left = 8
-        Top = 64
-        Width = 185
-        Height = 25
-        Caption = 'Add Ascending Order'
-        TabOrder = 2
-        TabStop = False
-      end
       object Button3: TButton
         Left = 200
-        Top = 91
-        Width = 377
+        Top = 83
+        Width = 185
         Height = 25
         Caption = 'Get Simple List'
-        TabOrder = 6
+        TabOrder = 3
         TabStop = False
         OnClick = Button3Click
       end
       object memoOrderAsc: TMemo
-        Left = 200
-        Top = 29
+        Left = 8
+        Top = 21
         Width = 185
         Height = 57
-        TabOrder = 4
+        TabOrder = 1
       end
       object Button1: TButton
         Left = 8
-        Top = 91
+        Top = 83
         Width = 185
         Height = 25
         Caption = 'Clear Orders'
-        TabOrder = 3
+        TabOrder = 0
         TabStop = False
-        OnClick = Button1Click
       end
       object memoOrderDesc: TMemo
-        Left = 392
-        Top = 29
+        Left = 200
+        Top = 21
         Width = 185
         Height = 57
-        TabOrder = 5
+        TabOrder = 2
       end
     end
   end

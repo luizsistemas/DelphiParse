@@ -34,17 +34,9 @@ unit DelphiParse.Query;
 interface
 
 uses System.Generics.Collections, System.SysUtils,
-  DelphiParse.Interfaces, System.Net.URLClient;
+  DelphiParse.Interfaces, DelphiParse.Utils, System.Net.URLClient;
 
 type
-  ExceptionParseKeyDuplicate = class(Exception);
-
-  TParams = record
-    Key: string;
-    Value: string;
-    FieldType: string;
-  end;
-
   TParseQuery = class(TInterfacedObject, IParseQuery)
   private
     EqualToParams: TList<TParams>;
@@ -52,23 +44,27 @@ type
     ContainsParams: TList<TParams>;
     LessThenParams: TList<TParams>;
     OthersParams: TList<TParams>;
+    ComparisonsParams: TList<TParams>;
     Keys: TList<string>;
     Order: TList<string>;
     FLimit: Integer;
     FSkip: Integer;
-    procedure ValidatesKey(Key: string; Params: TList<TParams>);
     function FormatEqualTo: string;
-    function FormatStartsWith: string;
-    function FormatContains: string;
+
+    //Comparisons
+    procedure SetComparisons(ParameterValue: string; Params: TList<TParams>);
+    procedure SetFormatStartsWith;
+    procedure SetFormatContains;
+    procedure SetFormatLessThen;
+
+    function FormatComparisons: String;
+
     function FormatLimit: string;
     function FormatWhereTerms: string;
     function FormatSkip: string;
     function FormatOthers: string;
     function FormatOrders: string;
     function FormatKeys: string;
-    procedure AddParams(Key, Value, FieldType: string; Params: TList<TParams>);
-    function FormatParams(CustomParameter: string;
-      Params: TList<TParams>): string;
   public
     constructor Create;
     destructor Destroy; override;
@@ -95,23 +91,11 @@ type
     function GetParamsFormatted: string;
   end;
 
-function ContainsKey(Key: string; List: TList<TParams>): Boolean;
-
 implementation
 
 { TParseQuery }
 
-uses DelphiParse.Utils, Dialogs;
-
-function ContainsKey(Key: string; List: TList<TParams>): Boolean;
-var
-  Param: TParams;
-begin
-  Result := False;
-  for Param in List do
-    if Key = Param.Key then
-      Result := True;
-end;
+uses Dialogs;
 
 function TParseQuery.Count: Integer;
 begin
@@ -126,9 +110,24 @@ begin
   EqualToParams := TList<TParams>.Create;
   StartsWithParams := TList<TParams>.Create;
   ContainsParams := TList<TParams>.Create;
+  LessThenParams := TList<TParams>.Create;
+  ComparisonsParams := TList<TParams>.Create();
   OthersParams := TList<TParams>.Create;
   Keys := TList<string>.Create;
   Order := TList<string>.Create;
+end;
+
+destructor TParseQuery.Destroy;
+begin
+  EqualToParams.Free;
+  StartsWithParams.Free;
+  ContainsParams.Free;
+  LessThenParams.Free;
+  OthersParams.Free;
+  ComparisonsParams.Free;
+  Keys.Free;
+  Order.Free;
+  inherited;
 end;
 
 procedure TParseQuery.AddRestrictFields(Field: string);
@@ -146,47 +145,61 @@ begin
   Order.Add('-' + Field);
 end;
 
-destructor TParseQuery.Destroy;
-begin
-  EqualToParams.Free;
-  StartsWithParams.Free;
-  ContainsParams.Free;
-  OthersParams.Free;
-  Keys.Free;
-  Order.Free;
-  inherited;
-end;
-
-function TParseQuery.FormatParams(CustomParameter: string; Params: TList<TParams>): string;
-var
-  Param: TParams;
-  KeyDec, ValueDec: string;
-begin
-  if Params.Count = 0 then
-    Exit;
-  for Param in Params do
-  begin
-    KeyDec := TURI.URLDecode(Param.Key);
-    ValueDec := TURI.URLDecode(Param.Value);
-    if Result <> '' then
-      Result := Result + ',';
-    Result := Result + Format(CustomParameter, [KeyDec, ValueDec]);
-  end;
-end;
-
 function TParseQuery.FormatEqualTo: string;
 begin
   Result := FormatParams('"%s":"%s"', EqualToParams);
 end;
 
-function TParseQuery.FormatStartsWith: string;
+function TParseQuery.FormatComparisons: String;
 begin
-  Result := FormatParams('"%s":{"$regex":"^%s"}', StartsWithParams);
+  SetFormatStartsWith;
+  SetFormatContains;
+  SetFormatLessThen;
+  Result := FormatParams('"%s":{%s}', ComparisonsParams);
 end;
 
-function TParseQuery.FormatContains: string;
+procedure TParseQuery.SetComparisons(ParameterValue: string; Params: TList<TParams>);
+var
+  Param, ComparisonParam: TParams;
+  Value: string;
+  Index: Integer;
 begin
-  Result := FormatParams('"%s":{"$regex":"%s"}', ContainsParams);
+  if Params.Count = 0 then
+    Exit;
+
+  for Param in Params do
+  begin
+    Value := Format(ParameterValue, [Param.Value]);
+    ComparisonParam.Key := TURI.URLDecode(Param.Key);
+    ComparisonParam.FieldType := Param.FieldType;
+    if ContainsKey(Param.Key, ComparisonsParams) then
+    begin
+      Index := GetIndexParams(Param.Key, ComparisonsParams);
+      Value := ComparisonsParams.Items[Index].Value + ',' + Value;
+      ComparisonParam.Value := TURI.URLDecode(Value);
+      ComparisonsParams.Items[Index] := ComparisonParam;
+    end
+    else
+    begin
+      ComparisonParam.Value := TURI.URLDecode(Value);
+      ComparisonsParams.Add(ComparisonParam);
+    end;
+  end;
+end;
+
+procedure TParseQuery.SetFormatStartsWith;
+begin
+  SetComparisons('"$regex":"^%s"', StartsWithParams);
+end;
+
+procedure TParseQuery.SetFormatContains;
+begin
+  SetComparisons('"$regex":"%s"', ContainsParams);
+end;
+
+procedure TParseQuery.SetFormatLessThen;
+begin
+ SetComparisons('"$lte":"%s"', LessThenParams);
 end;
 
 function TParseQuery.FormatOthers: string;
@@ -222,16 +235,13 @@ end;
 
 function TParseQuery.FormatWhereTerms: string;
 var
-  Formatos: Array[0..2] of string;
-  Texto: string;
+  Formats: Array[0..1] of string;
 begin
   if Count = 0 then
     Exit;
-  Formatos[0] := FormatEqualTo;
-  Formatos[1] := FormatStartsWith;
-  Formatos[2] := FormatContains;
-  Texto := GetElementsNotEmpty(',', Formatos);
-  Result := Format('where={%s}', [Texto]);
+  Formats[0] := FormatEqualTo;
+  Formats[1] := FormatComparisons;
+  Result := Format('where={%s}', [GetElementsNotEmpty(',', Formats)]);
 end;
 
 function TParseQuery.GetParamsFormatted: string;
@@ -247,12 +257,6 @@ begin
   Result := GetElementsNotEmpty('&', Terms);
 end;
 
-procedure TParseQuery.ValidatesKey(Key: string; Params: TList<TParams>);
-begin
-  if ContainsKey(Key, Params) then
-    raise ExceptionParseKeyDuplicate.Create('Key already exists with that name');
-end;
-
 procedure TParseQuery.SetLimit(Value: Integer);
 begin
   FLimit := Value;
@@ -261,17 +265,6 @@ end;
 procedure TParseQuery.SetSkip(Value: Integer);
 begin
   FSkip := Value;
-end;
-
-procedure TParseQuery.AddParams(Key, Value, FieldType: string; Params: TList<TParams>);
-var
-  Param: TParams;
-begin
-  Param.Key := Key;
-  Param.Value := Value;
-  Param.FieldType := FieldType;
-  ValidatesKey(Key, Params);
-  Params.Add(Param);
 end;
 
 procedure TParseQuery.Others(Key, Value: string);

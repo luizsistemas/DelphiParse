@@ -3,7 +3,7 @@ unit TestQuery;
 interface
 
 uses
-  TestFramework, DelphiParse.Query;
+  TestFramework, DelphiParse.Query, DelphiParse.Utils;
 type
   TTestQuery = class(TTestCase)
   private
@@ -22,6 +22,7 @@ type
     procedure AdicionarLimiteTresRegistros;
     procedure AdicionarSkipDoisRegistros;
     procedure TestaWheresComLimiteESkip;
+    procedure TestaWhereCampoComIntervalos;
   end;
 
 implementation
@@ -39,6 +40,13 @@ procedure TTestQuery.TearDown;
 begin
   inherited;
   Query.Free;
+end;
+
+procedure TTestQuery.TestaWhereCampoComIntervalos;
+begin
+  Query.WhereStartsWith('mensagem','m');
+  Query.WhereContains('mensagem','feliz');
+  CheckEqualsString('where={"mensagem":{"$regex":"^m","$regex":"feliz"}}', Query.GetParamsFormatted,'Resultado não confere com o experado');
 end;
 
 procedure TTestQuery.TestaWheresComLimiteESkip;

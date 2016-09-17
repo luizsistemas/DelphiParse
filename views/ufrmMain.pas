@@ -35,9 +35,6 @@ type
     TabSheet3: TTabSheet;
     btnUpdate: TButton;
     btnDelete: TButton;
-    edOrderBy: TEdit;
-    btnOrderAsc: TButton;
-    btnOrderDesc: TButton;
     Button3: TButton;
     memoOrderAsc: TMemo;
     Label1: TLabel;
@@ -60,7 +57,6 @@ type
     procedure btnCurrentUserClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure btnLessThenClick(Sender: TObject);
   private
     procedure ObjetoToMemo(MensagemObj: TMensagem);
@@ -197,12 +193,6 @@ begin
   Resultado := Parse.GetInBackGround;
   memResult.Lines.Clear;
   memResult.Lines.Add(Resultado);
-end;
-
-procedure TfrmMain.Button1Click(Sender: TObject);
-begin
-  memoOrderAsc.Clear;
-  memoOrderDesc.Clear;
 end;
 
 procedure TfrmMain.btnLessThenClick(Sender: TObject);
