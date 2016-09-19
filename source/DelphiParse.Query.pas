@@ -96,11 +96,6 @@ implementation
 
 uses Dialogs;
 
-function TParseQuery.Count: Integer;
-begin
-  Result := Constraints.CountWhere;
-end;
-
 constructor TParseQuery.Create;
 begin
   inherited;
@@ -117,6 +112,11 @@ begin
   Keys.Free;
   Order.Free;
   inherited;
+end;
+
+function TParseQuery.Count: Integer;
+begin
+  Result := Constraints.CountWhere;
 end;
 
 procedure TParseQuery.AddRestrictFields(Field: string);
