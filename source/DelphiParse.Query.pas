@@ -264,33 +264,33 @@ end;
 
 procedure TParseQuery.Others(Key, Value: string);
 begin
-  AddParams(Key, Value, Constraints.Items(ctOthers));
+  Constraints.AddParams(Key, Value, ctOthers);
 end;
 
 procedure TParseQuery.WhereContains(Key, Value: string);
 begin
-  AddParams(Key, Value, Constraints.Items(ctContains));
+  Constraints.AddParams(Key, Value, ctContains);
 end;
 
 procedure TParseQuery.WhereEqualTo(Key, Value: string);
 begin
-  AddParams(Key, Value, Constraints.Items(ctEqualTo));
+  Constraints.AddParams(Key, Value, ctEqualTo);
 end;
 
 procedure TParseQuery.WhereGreaterThan(Key, Value: string;
   FieldType: TFieldType);
 begin
-  AddParams(Key, Value, Constraints.Items(ctGreaterThan), FieldType);
+  Constraints.AddParams(Key, Value, ctGreaterThan, FieldType);
 end;
 
 procedure TParseQuery.WhereLessThan(Key, Value: string; FieldType: TFieldType);
 begin
-  AddParams(Key, Value, Constraints.Items(ctLessThan), FieldType);
+  Constraints.AddParams(Key, Value, ctLessThan, FieldType);
 end;
 
 procedure TParseQuery.WhereStartsWith(Key, Value: string);
 begin
-  AddParams(Key, '^' + Value, Constraints.Items(ctStartsWith));
+  Constraints.AddParams(Key, '^' + Value, ctStartsWith);
 end;
 
 end.

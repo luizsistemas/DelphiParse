@@ -36,11 +36,6 @@ interface
 uses
   System.SysUtils, DelphiParse.Interfaces, Generics.Collections,
    DelphiParse.Constraints, System.JSON, Variants;
-type
-  ExceptionParseKeyDuplicate = class(Exception);
-
-procedure AddParams(Key, Value: string; Params: TList<TParams>; FieldType: TFieldType = ftString);
-procedure ValidatesKey(Key: string; Params: TList<TParams>);
 
 function GetElementsNotEmpty(Separator: String; Elements: Array of string): string;
 function FormatParams(CustomParameter: string; Params: TList<TParams>): string;
@@ -105,23 +100,6 @@ begin
   for Param in List do
     if Key = Param.Key then
       Result := True;
-end;
-
-procedure ValidatesKey(Key: string; Params: TList<TParams>);
-begin
-  if ContainsKey(Key, Params) then
-    raise ExceptionParseKeyDuplicate.Create('Key already exists with that name');
-end;
-
-procedure AddParams(Key, Value: string; Params: TList<TParams>; FieldType: TFieldType);
-var
-  Param: TParams;
-begin
-  Param.Key := Key;
-  Param.Value := Value;
-  Param.FieldType := FieldType;
-  ValidatesKey(Key, Params);
-  Params.Add(Param);
 end;
 
 function GetElementsNotEmpty(Separator: String; Elements: Array of string): string;

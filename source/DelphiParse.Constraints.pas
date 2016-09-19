@@ -3,9 +3,12 @@ unit DelphiParse.Constraints;
 interface
 
 uses
-  DelphiParse.Interfaces, System.Generics.Collections;
+  DelphiParse.Interfaces, System.Generics.Collections,
+  System.SysUtils;
 
 type
+  ExceptionParseKeyDuplicate = class(Exception);
+
   TConstraintType = (ctEqualTo, ctStartsWith, ctContains,
     ctLessThan, ctGreaterThan, ctOthers);
 
@@ -18,20 +21,45 @@ type
   TConstraints = class
   private
     List: TObjectDictionary<TConstraintType, TList<TParams>>;
+    procedure ValidatesKey(Key: string; Params: TList<TParams>);
   public
     constructor Create;
     destructor Destroy; override;
 
-    procedure Add(ConstraintType: TConstraintType);
+    procedure AddParams(Key, Value: string; ConstraintType: TConstraintType;
+      FieldType: TFieldType = ftString);
+
+    procedure AddConstraint(ConstraintType: TConstraintType);
     function Items(Key: TConstraintType): TList<TParams>;
     function CountWhere: Integer;
   end;
 
 implementation
 
+uses
+  DelphiParse.Utils;
+
 { TConstraints }
 
-procedure TConstraints.Add(ConstraintType: TConstraintType);
+
+procedure TConstraints.ValidatesKey(Key: string; Params: TList<TParams>);
+begin
+  if ContainsKey(Key, Params) then
+    raise ExceptionParseKeyDuplicate.Create('Key already exists with that name');
+end;
+
+procedure TConstraints.AddParams(Key, Value: string; ConstraintType: TConstraintType; FieldType: TFieldType);
+var
+  Param: TParams;
+begin
+  Param.Key := Key;
+  Param.Value := Value;
+  Param.FieldType := FieldType;
+  ValidatesKey(Key, Self.Items(ConstraintType));
+  Items(ConstraintType).Add(Param);
+end;
+
+procedure TConstraints.AddConstraint(ConstraintType: TConstraintType);
 begin
   List.Add(ConstraintType, TList<TParams>.Create);
 end;
@@ -51,12 +79,12 @@ constructor TConstraints.Create;
 begin
   inherited;
   List := TObjectDictionary<TConstraintType, TList<TParams>>.Create([doOwnsValues]);
-  Self.Add(ctEqualTo);
-  Self.Add(ctStartsWith);
-  Self.Add(ctContains);
-  Self.Add(ctLessThan);
-  Self.Add(ctGreaterThan);
-  Self.Add(ctOthers);
+  Self.AddConstraint(ctEqualTo);
+  Self.AddConstraint(ctStartsWith);
+  Self.AddConstraint(ctContains);
+  Self.AddConstraint(ctLessThan);
+  Self.AddConstraint(ctGreaterThan);
+  Self.AddConstraint(ctOthers);
 end;
 
 destructor TConstraints.Destroy;

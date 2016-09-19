@@ -2,6 +2,6 @@
 <BorlandProject>
 	<Transactions/>
 	<Default.Personality>
-		<Projects ActiveProject="F:\Delphi10\Projetos\DelphiParse\DelphiParseProject.dproj"/>
+		<Projects ActiveProject="F:\Delphi10\Projetos\DelphiParse\Test\DelphiParseProjectTests.dproj"/>
 	</Default.Personality>
 </BorlandProject>

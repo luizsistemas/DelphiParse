@@ -3,7 +3,7 @@ unit TestQuery;
 interface
 
 uses
-  TestFramework, DelphiParse.Query, DelphiParse.Utils;
+  TestFramework, DelphiParse.Query, DelphiParse.Utils, DelphiParse.Constraints;
 type
   TTestQuery = class(TTestCase)
   private
