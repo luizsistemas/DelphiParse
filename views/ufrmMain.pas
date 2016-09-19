@@ -231,7 +231,7 @@ var
   Parse: IParseObject;
   Response: string;
 begin
-  Text := InputBox('LessThen test in the Level field', 'Text:','');
+  Text := InputBox('LessThan test in the Level field', 'Text:','');
   Parse := TParseObjects.Create('Mensagens');
   Parse.WhereLessThan('level', Text, ftNumber);
   Response := Parse.GetInBackGround;

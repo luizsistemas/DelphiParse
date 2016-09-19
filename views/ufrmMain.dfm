@@ -28,7 +28,6 @@ object frmMain: TfrmMain
     ParentFont = False
     ScrollBars = ssBoth
     TabOrder = 0
-    ExplicitWidth = 752
   end
   object GroupBox1: TGroupBox
     Left = 0
@@ -38,7 +37,6 @@ object frmMain: TfrmMain
     Align = alBottom
     Caption = 'Users'
     TabOrder = 1
-    ExplicitWidth = 752
     object edUsername: TEdit
       Left = 8
       Top = 16
@@ -108,10 +106,8 @@ object frmMain: TfrmMain
     ActivePage = TabSheet2
     Align = alBottom
     TabOrder = 2
-    ExplicitWidth = 752
     object TabSheet1: TTabSheet
       Caption = 'Send Message'
-      ExplicitWidth = 744
       object editUser: TEdit
         Left = 8
         Top = 20
@@ -168,9 +164,6 @@ object frmMain: TfrmMain
     object TabSheet2: TTabSheet
       Caption = 'Query'
       ImageIndex = 1
-      ExplicitLeft = 36
-      ExplicitTop = 32
-      ExplicitWidth = 744
       object Label3: TLabel
         Left = 280
         Top = 0
@@ -272,7 +265,10 @@ object frmMain: TfrmMain
     object TabSheet3: TTabSheet
       Caption = 'Order'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 744
+      ExplicitHeight = 0
       object Label1: TLabel
         Left = 8
         Top = 5
